@@ -1,21 +1,30 @@
 <template lang="pug">
-.doc
-	div.zg  заголовок
-	div.but  кнопки действий
-	div.main  основная.область
-	div.attr атрибуты
+div
+	.doc
+		.zg заголовок
+		.but кнопки действий
+		.main основная.область
+		.attr атрибуты
 
+	br
+	<quill-editor ref="myQuillEditor" v-model="content" :options="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)" />
 </template>
 
 <script>
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
+import { quillEditor } from 'vue-quill-editor'
 
 export default {
-	data () {
-		return {
-		}
-	}
+	data() {
+		return {}
+	},
+	components: {
+		quillEditor,
+	},
 }
-
 </script>
 
 <style scoped lang="scss">
@@ -24,7 +33,7 @@ export default {
 .doc {
 	margin-bottom: 5rem;
 	display: grid;
-	gap: .5rem;
+	gap: 0.5rem;
 	grid-template-columns: repeat(8, 1fr);
 	grid-template-rows: repeat (min-content, auto);
 	> div {
