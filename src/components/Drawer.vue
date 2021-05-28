@@ -7,14 +7,11 @@ v-navigation-drawer(v-model="drawer" dark :color="maincolor" clipped app :mini-v
 				v-icon {{ item.icon }}
 			v-list-item-content
 				v-list-item-title {{ item.text }}
-		v-list-item(link @click="goTo('/doc-shared')")
-			v-list-item-icon
-				img(src="@/assets/img/shared-doc.svg").ic
-			v-list-item-content
-				v-list-item-title Общие документы
 
 	v-btn.mini(@click="toggleMini" icon)
-		v-icon mdi-backburger
+		v-icon(v-if="!mini") mdi-backburger
+		v-icon(v-else) mdi-forwardburger
+
 </template>
 
 <script>
