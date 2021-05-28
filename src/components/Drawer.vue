@@ -1,5 +1,5 @@
 <template lang="pug">
-v-navigation-drawer(v-model="drawer" dark :color="maincolor" clipped app :mini-variant.sync="mini" )
+v-navigation-drawer(v-model="drawer" dark :color="maincolor" clipped app :mini-variant.sync="mini" width="310")
 	v-list
 		v-list-item(link @click="goTo(item.url)" v-for="item in menu" :key="item.id"
 			:class="path === item.url ? 'active' : ''")
@@ -7,6 +7,11 @@ v-navigation-drawer(v-model="drawer" dark :color="maincolor" clipped app :mini-v
 				v-icon {{ item.icon }}
 			v-list-item-content
 				v-list-item-title {{ item.text }}
+		v-list-item(link @click="goTo('/doc-shared')")
+			v-list-item-icon
+				img(src="@/assets/img/shared-doc.svg").ic
+			v-list-item-content
+				v-list-item-title Общие документы
 
 	v-btn.mini(@click="toggleMini" icon)
 		v-icon mdi-backburger
@@ -24,11 +29,10 @@ export default {
 			},
 			menu: [
 				{ id: 0, url: '/', icon: 'mdi-home-roof', text: 'Главная' },
-				{ id: 1, url: '/doc', icon: 'mdi-file-image-outline', text: 'Схема 1' },
-				{ id: 2, url: '/doc1', icon: 'mdi-file-image-outline', text: 'Схема 2' },
-				{ id: 3, url: '/doc2', icon: 'mdi-file-image-outline', text: 'Верстка 2' },
-				{ id: 4, url: '/task', icon: 'mdi-folder-outline', text: 'Задания' },
-				{ id: 5, url: '/folder', icon: 'mdi-folder-outline', text: 'Папка' },
+				{ id: 1, url: '/folder', icon: 'mdi-magnify', text: 'Поиск' },
+				{ id: 2, url: '/fold', icon: 'mdi-history', text: 'Последние карточки' },
+				{ id: 3, url: '/task', icon: '', text: 'МОИ ЗАДАНИЯ' },
+				{ id: 4, url: '/doc2', icon: '', text: 'МОИ ДОКУМЕНТЫ' },
 			],
 		}
 	},
@@ -83,6 +87,7 @@ export default {
 }
 .ic {
 	font-size: 1.3rem;
+	width: 24px;
 }
 .v-application--is-ltr .v-list-item__icon:first-child {
 	margin-right: 1rem;
@@ -98,4 +103,7 @@ export default {
 .theme--dark .active {
 	background: rgba(255,255,255,.07);
 }
+	.v-list-item {
+		border-bottom: 1px solid rgba(0,0,0, .3);
+	}
 </style>

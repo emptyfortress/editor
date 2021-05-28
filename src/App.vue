@@ -4,14 +4,24 @@ v-app
 	v-app-bar(app :color="maincolor" flat clipped-left elevation="2" ).pr-2
 		v-app-bar-nav-icon(color="#fff" @click="$store.commit('toggleDrawer')")
 		.logo(v-show="!$vuetify.breakpoint.mobile")
-			span Docsvision {{maincolor}}
+			span {{ title }}
 		v-spacer
 		v-btn( href="" icon ).mr-3
 			v-icon(color="#fff") mdi-magnify
 		v-avatar(color="blue lighten-4" size="35"  v-ripple )
 			img(src="@/assets/img/user0.svg")
+		v-btn(icon dark).ml-3
+			v-icon mdi-help-circle-outline
 	v-main
 		.subbar(:class="maincolor")
+			v-btn(text dark)
+				v-icon mdi-plus
+				span Создать
+			v-btn(text dark)
+				v-icon mdi-text-box-plus-outline
+				span Создать
+			v-btn(icon dark)
+				i.icon-search-scan
 		v-container.cont
 			router-view
 
@@ -31,6 +41,7 @@ export default {
 		//
 	}),
 	computed: {
+		title () { return this.$route.meta.title },
 		drawer() { return this.$store.getters.drawer },
 		mini() { return this.$store.getters.mini },
 	},
@@ -52,7 +63,7 @@ export default {
 .logo {
 	color: #fff;
 	font-size: 1.4rem;
-	width: 250px;
+	/* width: 250px; */
 }
 .icon-user, .icon-search, .icon-search-scan {
 	font-size: 1.2rem;
@@ -60,5 +71,8 @@ export default {
 }
 .subbar {
 	height: 42px;
+	.v-btn {
+		height: 42px;
+	}
 }
 </style>
