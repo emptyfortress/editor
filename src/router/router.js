@@ -7,6 +7,7 @@ import Doc from '@/components/Doc'
 import Doc1 from '@/components/Doc1'
 import Doc2 from '@/components/Doc2'
 import Shared from '@/components/Shared'
+import History from '@/components/History'
 
 Vue.use(VueRouter)
 
@@ -23,6 +24,9 @@ const routes = [
 		path: '/task',
 		name: 'task',
 		component: Task,
+		meta: {
+			title: 'Задания'
+		}
 	},
 	{
 		path: '/doc-shared',
@@ -36,24 +40,42 @@ const routes = [
 		path: '/doc',
 		name: 'doc',
 		component: Doc,
-		props: {
-			maincolor: 'docolor'
-		},
+		meta: {
+			title: 'Документы'
+		}
 	},
 	{
 		path: '/doc1',
 		name: 'doc1',
 		component: Doc1,
+		meta: {
+			title: 'Документы'
+		}
 	},
 	{
 		path: '/doc2',
 		name: 'doc2',
 		component: Doc2,
+		meta: {
+			title: 'Документы'
+		}
 	},
 	{
 		path: '/folder',
 		name: 'folder',
 		component: Folder,
+		meta: {
+			title: 'Поиск'
+		}
+
+	},
+	{
+		path: '/history',
+		name: 'history',
+		component: History,
+		meta: {
+			title: 'История'
+		}
 	},
 	{
 		path: '/about',
