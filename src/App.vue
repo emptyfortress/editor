@@ -8,8 +8,21 @@ v-app
 		v-spacer
 		v-btn( href="" icon ).mr-3
 			v-icon(color="#fff") mdi-magnify
-		v-avatar(color="blue lighten-4" size="35"  v-ripple )
-			img(src="@/assets/img/user0.svg")
+		v-menu(bottom left)
+			template(v-slot:activator="{ on, attrs }")
+				.rel
+					v-avatar(color="blue lighten-4" size="35"  v-ripple v-bind="attrs" v-on="on")
+						img(:src="require(`@/assets/img/user${user}.svg`)")
+					.dot
+			v-list.menu
+				v-list-item(link)
+					v-list-item-title {{ name1 }}
+			.avat
+				.rel
+					v-avatar(color="blue lighten-4" size="35"  v-ripple)
+						img(:src="require(`@/assets/img/user${user}.svg`)")
+					.dot
+
 		v-btn(icon dark).ml-3
 			v-icon mdi-help-circle-outline
 	v-main
@@ -17,7 +30,7 @@ v-app
 			v-btn(text dark)
 				v-icon mdi-plus
 				span Создать
-			v-btn(text dark)
+			//- v-btn(text dark)
 				v-icon mdi-text-box-plus-outline
 				span Создать
 			v-btn(icon dark)
@@ -44,6 +57,12 @@ export default {
 		title () { return this.$route.meta.title },
 		drawer() { return this.$store.getters.drawer },
 		mini() { return this.$store.getters.mini },
+		user () { return this.$store.getters.user },
+		name1 () {
+			if (this.user === 0) {
+				return 'Орлов П.С.'
+			} else return 'Гусев К.А.'
+		}
 	},
 }
 </script>
@@ -74,5 +93,27 @@ export default {
 	.v-btn {
 		height: 42px;
 	}
+}
+.menu {
+	width: 200px;
+}
+.avat {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+.v-list {
+	padding-top: 0;
+}
+.dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: #39C83C;
+	border: 1px solid #fff;
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	
 }
 </style>

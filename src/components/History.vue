@@ -1,5 +1,5 @@
 <template lang="pug">
-h1 Hello
+h1 История
 </template>
 
 <script>
