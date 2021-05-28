@@ -15,8 +15,20 @@ v-app
 						img(:src="require(`@/assets/img/user${user}.svg`)")
 					.dot
 			v-list.menu
-				v-list-item(link)
-					v-list-item-title {{ name1 }}
+				v-list-item(link two-line )
+					v-list-item-content
+						v-list-item-title {{ name1 }}
+						v-list-item-subtitle
+							span.ddot
+							span активен
+				v-list-item(link two-line @click="setUser()")
+					v-list-item-content
+						v-list-item-title {{ name2 }}
+						v-list-item-subtitle
+							span.ddot.orange
+							span неактивeн
+					v-list-item-avatar(color="blue lighten-4")
+						v-img(:src="require(`@/assets/img/user${user2}.svg`)")
 			.avat
 				.rel
 					v-avatar(color="blue lighten-4" size="35"  v-ripple)
@@ -58,12 +70,29 @@ export default {
 		drawer() { return this.$store.getters.drawer },
 		mini() { return this.$store.getters.mini },
 		user () { return this.$store.getters.user },
+		user2 () {
+			if (this.user === 0) {
+				return 1
+			} else return 0
+		},
 		name1 () {
 			if (this.user === 0) {
 				return 'Орлов П.С.'
-			} else return 'Гусев К.А.'
+			} else return 'Гусева К.А.'
+		},
+		name2 () {
+			if (this.user === 0) {
+				return 'Гусева К.А.'
+			} else return 'Орлов П.С.'
 		}
 	},
+	methods: {
+		setUser () {
+			if (this.user === 0) {
+				this.$store.commit('setUser', 1)
+			} else this.$store.commit('setUser', 0)
+		}
+	}
 }
 </script>
 
@@ -104,6 +133,7 @@ export default {
 }
 .v-list {
 	padding-top: 0;
+	padding-bottom: 0;
 }
 .dot {
 	width: 10px;
@@ -114,6 +144,14 @@ export default {
 	position: absolute;
 	bottom: 0px;
 	left: 0px;
-	
+}
+.ddot {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: #39C83C;
+	border: 1px solid #fff;
+	margin-right: 5px;
 }
 </style>
