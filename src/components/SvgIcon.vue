@@ -25,7 +25,7 @@ svg.icon {
 	width: 1em;
 	height: 1em;
 	vertical-align: middle;
-	/* margin-bottom: 0.125em; */
+	margin-bottom: 0.125em;
 	fill: currentColor;
 }
 

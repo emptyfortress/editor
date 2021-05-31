@@ -1,21 +1,18 @@
 <template lang="pug">
 .home
-	p
-		span lakjslk
-		svg-icon(icon="search-scan").test
-	div
-	div
-	div
-	div
+	Section
+	Section
+	Section
+	Section
 
 </template>
 
 <script>
-// @ is an alias to /src
+import Section from '@/components/Section.vue'
 
 export default {
 	name: 'Home',
-	components: { },
+	components: { Section },
 	data() {
 		return {
 			one: 1,
@@ -25,14 +22,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.test {
-	font-size: 4.0rem;
-	color: red;
-}
 .home {
-
-}
-.laksj {
-
+	display: grid;
+	grid-template-columns: repeat( 3, 1fr );
+	gap: 2rem;
 }
 </style>
