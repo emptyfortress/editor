@@ -1,5 +1,5 @@
 <template lang="pug">
-.doc
+//- .doc
 	div.zg  заголовок
 	div.but  кнопки действий
 	div.main превью (основная область)

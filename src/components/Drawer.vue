@@ -29,7 +29,7 @@ export default {
 				{ id: 1, url: '/folder', icon: 'mdi-magnify', text: 'Поиск' },
 				{ id: 2, url: '/history', icon: 'mdi-history', text: 'Последние карточки' },
 				{ id: 3, url: '/task', icon: '', text: 'МОИ ЗАДАНИЯ' },
-				{ id: 4, url: '/doc2', icon: '', text: 'МОИ ДОКУМЕНТЫ' },
+				{ id: 4, url: '/doc', icon: '', text: 'МОИ ДОКУМЕНТЫ' },
 			],
 		}
 	},

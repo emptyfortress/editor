@@ -9,7 +9,7 @@ div
 		thead
 			th Контрагент
 			th База данных
-		tr(v-for="item in filteredItems")
+		tr(v-for="item in filteredItems" :key="item.id" @click="go(item)")
 			td {{item.name}}
 			td {{ item.bd }}
 	//- ul
@@ -23,25 +23,33 @@ div
 export default {
 	data() {
 		return {
-			search: '',
+			search: null,
 			tenants: [
-				{ id: 0, bd: 'docsvision 1', name: 'Университет' },
-				{ id: 1, bd: 'docsvision 2', name: 'Пробирная палата' },
-				{ id: 2, bd: 'test database', name: 'Контрагент 1' },
-				{ id: 3, bd: 'test database', name: 'Контрагент 2' },
-				{ id: 4, bd: 'add45fga', name: 'Гознак' },
-				{ id: 5, bd: 'la11lsd.test', name: 'Трактир "Три дороги"' },
+				{ id: 0, url: 'http://docsvision1.goznak.digdes.com:81/DocsvisionWebClient/Account/Login?returnUrl=%2FDocsvisionWebClient%2F&tenantId=docsvision1', bd: 'docsvision 1', name: 'Университет' },
+				{ id: 1, url: 'http://docsvision2.goznak.digdes.com:81/DocsvisionWebClient/Account/Login?returnUrl=http%3A%2F%2Fdocsvision2.goznak.digdes.com%3A81%2FDocsvisionWebClient%2F%23%2FDashboard', bd: 'docsvision 2', name: 'Пробирная палата' },
+				{ id: 2, url: '', bd: 'test database', name: 'Контрагент 1' },
+				{ id: 3, url: '', bd: 'test database', name: 'Контрагент 2' },
+				{ id: 4, url: '', bd: 'add45fga', name: 'Гознак' },
+				{ id: 5, url: '', bd: 'la11lsd.test', name: 'Трактир "Три дороги"' },
 			],
 		}
 	},
 	computed: {
 		filteredItems () {
-			let filt = this.search.toLowerCase()
-			if (this.search.length) {
-				return this.tenants.filter( item => item.name.toLowerCase().includes(filt) || item.bd.includes(filt))
+			if ( this.search !== null ) {
+				return this.tenants.filter( item => item.name.toLowerCase().includes(this.search.toLowerCase()) || item.bd.includes(this.search.toLowerCase()))
 			} else return this.tenants
 		}
 		
+	},
+	methods: {
+		go(e) {
+			if (e.id === 0) {
+				window.location.href = 'http://docsvision1.goznak.digdes.com:81/DocsvisionWebClient/Account/Login?returnUrl=%2FDocsvisionWebClient%2F&tenantId=docsvision1'
+			} else if (e.id === 1) {
+				window.location.href = 'http://docsvision2.goznak.digdes.com:81/DocsvisionWebClient/Account/Login?returnUrl=http%3A%2F%2Fdocsvision2.goznak.digdes.com%3A81%2FDocsvisionWebClient%2F%23%2FDashboard'
+			}
+		}
 	}
 }
 </script>
