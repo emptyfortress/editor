@@ -8,9 +8,9 @@ v-app
 			img(src="@/assets/img/archive.svg")
 			//- span {{ title }}
 		v-spacer
-		v-btn( href="" icon ).mr-3
+		//- v-btn( href="" icon ).mr-3
 			v-icon(color="#fff") mdi-magnify
-		v-menu(bottom left)
+		//- v-menu(bottom left)
 			template(v-slot:activator="{ on, attrs }")
 				.rel
 					v-avatar(color="blue lighten-4" size="35"  v-ripple v-bind="attrs" v-on="on")
@@ -37,14 +37,14 @@ v-app
 						img(:src="require(`@/assets/img/user${user}.svg`)")
 					.dot
 
-		v-btn(icon dark).ml-3
+		//- v-btn(icon dark).ml-3
 			v-icon mdi-help-circle-outline
 	v-main
 		.subbar(:class="maincolor")
-			v-btn(depressed dark color="#01392D")
+			//- v-btn(depressed dark color="#01392D")
 				v-icon mdi-plus
 				span Создать
-			.scan(v-ripple)
+			//- .scan(v-ripple)
 				svg-icon(icon="search-scan")
 		v-container.cont
 			router-view

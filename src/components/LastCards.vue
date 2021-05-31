@@ -1,7 +1,7 @@
 <template lang="pug">
 div
 	.hd
-		span Тенанты (5)
+		span Подключение к базам данных контрагентов (6)
 		.filter
 			v-text-field(dense v-model="search" clearable prepend-icon="mdi-magnify" label="Поиск" single-line hide-details)
 			//- v-text-field(label="Поиск" v-model="filter")
@@ -45,9 +45,9 @@ export default {
 	methods: {
 		go(e) {
 			if (e.id === 0) {
-				window.location.href = 'http://docsvision1.goznak.digdes.com:81/DocsvisionWebClient/Account/Login?returnUrl=%2FDocsvisionWebClient%2F&tenantId=docsvision1'
+				window.open('http://docsvision1.goznak.digdes.com:81/DocsvisionWebClient/Account/Login?returnUrl=%2FDocsvisionWebClient%2F&tenantId=docsvision1')
 			} else if (e.id === 1) {
-				window.location.href = 'http://docsvision2.goznak.digdes.com:81/DocsvisionWebClient/Account/Login?returnUrl=http%3A%2F%2Fdocsvision2.goznak.digdes.com%3A81%2FDocsvisionWebClient%2F%23%2FDashboard'
+				window.open('http://docsvision2.goznak.digdes.com:81/DocsvisionWebClient/Account/Login?returnUrl=http%3A%2F%2Fdocsvision2.goznak.digdes.com%3A81%2FDocsvisionWebClient%2F%23%2FDashboard')
 			}
 		}
 	}
