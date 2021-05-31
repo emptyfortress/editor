@@ -3,15 +3,15 @@ div
 	.hd
 		span Тенанты (5)
 		.filter
-			v-text-field(dense v-model="search" append-icon="mdi-magnify" label="Поиск" single-line hide-details)
+			v-text-field(dense v-model="search" clearable prepend-icon="mdi-magnify" label="Поиск" single-line hide-details)
 			//- v-text-field(label="Поиск" v-model="filter")
 	table.ten
 		thead
-			th Название
+			th Контрагент
 			th База данных
 		tr(v-for="item in filteredItems")
 			td {{item.name}}
-			td client
+			td {{ item.bd }}
 	//- ul
 		li(v-for="n in 4" v-ripple="{ class: 'info--text' }" )
 			.text text some
@@ -23,20 +23,23 @@ div
 export default {
 	data() {
 		return {
-			search: 'one',
+			search: '',
 			tenants: [
-				{ id: 0, name: 'one' },
-				{ id: 1, name: 'two' },
-				{ id: 2, name: 'three' },
-				{ id: 3, name: 'for' },
-				{ id: 4, name: 'ale' },
-				{ id: 5, name: 'one' },
+				{ id: 0, bd: 'docsvision 1', name: 'Университет' },
+				{ id: 1, bd: 'docsvision 2', name: 'Пробирная палата' },
+				{ id: 2, bd: 'test database', name: 'Контрагент 1' },
+				{ id: 3, bd: 'test database', name: 'Контрагент 2' },
+				{ id: 4, bd: 'add45fga', name: 'Гознак' },
+				{ id: 5, bd: 'la11lsd.test', name: 'Трактир "Три дороги"' },
 			],
 		}
 	},
 	computed: {
 		filteredItems () {
-			return this.tenants.filter( item => item.name.includes(this.search))
+			let filt = this.search.toLowerCase()
+			if (this.search.length) {
+				return this.tenants.filter( item => item.name.toLowerCase().includes(filt) || item.bd.includes(filt))
+			} else return this.tenants
 		}
 		
 	}
