@@ -1,7 +1,12 @@
 <template lang="pug">
 .home
-	h2 home
-	p(v-for="n in 30") Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec hendrerit tempor tellus.  Donec pretium posuere tellus.  Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus.  Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non turpis.  Cras placerat accumsan nulla.  Nullam rutrum.  Nam vestibulum accumsan nisl.
+	p
+		span lakjslk
+		svg-icon(icon="search-scan").test
+	div
+	div
+	div
+	div
 
 </template>
 
@@ -10,7 +15,24 @@
 
 export default {
 	name: 'Home',
-	components: {
-	}
+	components: { },
+	data() {
+		return {
+			one: 1,
+		}
+	},
 }
 </script>
+
+<style scoped lang="scss">
+.test {
+	font-size: 4.0rem;
+	color: red;
+}
+.home {
+
+}
+.laksj {
+
+}
+</style>

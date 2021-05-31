@@ -1,5 +1,6 @@
 <template lang="pug">
 v-app 
+	SvgSprite
 	Drawer(:maincolor="maincolor")
 	v-app-bar(app :color="maincolor" flat clipped-left elevation="2" ).pr-2
 		v-app-bar-nav-icon(color="#fff" @click="$store.commit('toggleDrawer')")
@@ -55,12 +56,14 @@ v-app
 <script>
 import Drawer from './components/Drawer'
 import {maincolor} from '@/components/mixins/maincolor'
+import SvgSprite from '@/components/SvgSprite.vue'
 
 export default {
 	name: 'App',
 	mixins: [maincolor],
 	components: {
 		Drawer,
+		SvgSprite,
 	},
 	data: () => ({
 		//
