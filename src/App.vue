@@ -43,11 +43,8 @@ v-app
 			v-btn(text dark)
 				v-icon mdi-plus
 				span Создать
-			//- v-btn(text dark)
-				v-icon mdi-text-box-plus-outline
-				span Создать
-			v-btn(icon dark)
-				i.icon-search-scan
+			.scan(v-ripple)
+				svg-icon(icon="search-scan")
 		v-container.cont
 			router-view
 
@@ -116,12 +113,13 @@ export default {
 	font-size: 1.4rem;
 	/* width: 250px; */
 }
-.icon-user, .icon-search, .icon-search-scan {
+.icon-user, .icon-search  {
 	font-size: 1.2rem;
 	margin-left: -4px;
 }
 .subbar {
 	height: 42px;
+	display: flex;
 	.v-btn {
 		height: 42px;
 	}
@@ -156,5 +154,12 @@ export default {
 	background: #39C83C;
 	border: 1px solid #fff;
 	margin-right: 5px;
+}
+.scan {
+	height: 42px;
+	font-size: 1.9rem;
+	color: #fff;
+	cursor: pointer;
+	padding: 0 1rem;
 }
 </style>
