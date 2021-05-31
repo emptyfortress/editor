@@ -1,8 +1,5 @@
 <template lang="pug">
 .home
-	Section
-	Section
-	Section
 	LastCards.full
 
 </template>
@@ -24,9 +21,9 @@ export default {
 
 <style scoped lang="scss">
 .home {
-	display: grid;
-	grid-template-columns: repeat( 3, 1fr );
-	gap: 2rem;
+	/* display: grid; */
+	/* grid-template-columns: repeat( 3, 1fr ); */
+	/* gap: 2rem; */
 }
 .full {
 	grid-column: 1/-1;

@@ -5,7 +5,8 @@ v-app
 	v-app-bar(app :color="maincolor" flat clipped-left elevation="2" ).pr-2
 		v-app-bar-nav-icon(color="#fff" @click="$store.commit('toggleDrawer')")
 		.logo(v-show="!$vuetify.breakpoint.mobile")
-			span {{ title }}
+			img(src="@/assets/img/archive.svg")
+			//- span {{ title }}
 		v-spacer
 		v-btn( href="" icon ).mr-3
 			v-icon(color="#fff") mdi-magnify
@@ -40,7 +41,7 @@ v-app
 			v-icon mdi-help-circle-outline
 	v-main
 		.subbar(:class="maincolor")
-			v-btn(text dark)
+			v-btn(depressed dark color="#01392D")
 				v-icon mdi-plus
 				span Создать
 			.scan(v-ripple)
@@ -111,6 +112,11 @@ export default {
 .logo {
 	color: #fff;
 	font-size: 1.4rem;
+	img {
+		margin-left: 2rem;
+		vertical-align: middle;
+		width: 150px;
+	}
 	/* width: 250px; */
 }
 .icon-user, .icon-search  {
