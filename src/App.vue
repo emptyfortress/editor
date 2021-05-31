@@ -40,7 +40,7 @@ v-app
 		//- v-btn(icon dark).ml-3
 			v-icon mdi-help-circle-outline
 	v-main
-		.subbar(:class="maincolor")
+		//- .subbar(:class="maincolor")
 			//- v-btn(depressed dark color="#01392D")
 				v-icon mdi-plus
 				span Создать
