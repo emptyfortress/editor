@@ -5,7 +5,7 @@ div
 		.switch
 			svg-icon(icon="1-line")
 			svg-icon(icon="2-line")
-	Table(:heads="heads" :items="items")
+	Table(:headers="headers" :items="items")
 </template>
 
 <script>
@@ -14,15 +14,20 @@ export default {
 	components: { Table },
 	data() {
 		return {
-			heads: [
-				{ title: 'lsj', },
-				{ title: 'lsj', },
-				{ title: 'lsj', },
-				{ title: 'lsj', },
+			items: [
+				{ name: 'Задание на ознакомление: Приказ', created: '20.05.21', modified: '20.05.21', unread: true},
+				{ name: 'Уведомление об оформлении отпуска', created: '20.05.21', modified: '20.05.21', unread: true},
+				{ name: 'Подтверждение отпуска через 2 недели', created: '20.05.21', modified: '20.05.21', },
+				{ name: 'Квартальная цель - 2 квартал', created: '20.05.21', modified: '20.05.21', },
+				{ name: 'Задание на исполнение: подготовить отчет', created: '20.05.21', modified: '20.05.21', },
+			],
+			headers: [
+				{ text: 'Название', align: 'start', value: 'name', },
+				{ text: 'Создано', value: 'created' },
+				{ text: 'Дата изменения', value: 'modified' },
 			]
 		}
-	},
-
+	}
 }
 </script>
 
@@ -35,7 +40,7 @@ export default {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	border-bottom: 1px solid #ccc;
+	/* border-bottom: 1px solid #ccc; */
 	color: $link;
 	cursor: pointer;
 	padding: 6px 3px;
