@@ -40,7 +40,7 @@ v-app
 			v-icon mdi-help-circle-outline
 	v-main
 		.subbar(:class="maincolor")
-			v-btn(text dark)
+			v-btn(dark depressed tile :color="create")
 				v-icon mdi-plus
 				span Создать
 			.scan(v-ripple)
@@ -66,6 +66,16 @@ export default {
 		//
 	}),
 	computed: {
+		create () {
+			switch (this.maincolor) {
+			case 'docolor':
+				return '#005484'
+			case 'taskcolor':
+				return '#3F6D34'
+			default:
+				return '#1B222C'
+			}
+		},
 		title () { return this.$route.meta.title },
 		drawer() { return this.$store.getters.drawer },
 		mini() { return this.$store.getters.mini },

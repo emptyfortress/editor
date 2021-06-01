@@ -1,8 +1,10 @@
 <template lang="pug">
 div
-	.hd(v-ripple="{ class: 'info--text' }")
+	.hd
 		span Последние карточки
-		.badge 4
+		.switch
+			svg-icon(icon="1-line")
+			svg-icon(icon="2-line")
 </template>
 
 <script>
@@ -25,7 +27,22 @@ export default {
 	cursor: pointer;
 	padding: 6px 3px;
 	&:hover {
-		background: #f7f7f7;
+		/* background: #f7f7f7; */
+	}
+}
+.switch {
+	color: #666;
+	display: flex;
+	svg {
+		border: 1px solid #999;
+		margin-left: 3px;
+		font-size: 2.0rem;
+		cursor: pointer;
+		color: #999;
+		&:hover {
+			color: #333;
+			border: 1px solid #333;
+		}
 	}
 }
 </style>
