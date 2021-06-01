@@ -5,10 +5,13 @@ div
 		.switch
 			svg-icon(icon="1-line")
 			svg-icon(icon="2-line")
+	Table
 </template>
 
 <script>
+import Table from '@/components/Table.vue'
 export default {
+	components: { Table }
 
 }
 </script>
