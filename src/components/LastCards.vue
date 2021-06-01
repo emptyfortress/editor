@@ -5,13 +5,23 @@ div
 		.switch
 			svg-icon(icon="1-line")
 			svg-icon(icon="2-line")
-	Table
+	Table(:heads="heads" :items="items")
 </template>
 
 <script>
 import Table from '@/components/Table.vue'
 export default {
-	components: { Table }
+	components: { Table },
+	data() {
+		return {
+			heads: [
+				{ title: 'lsj', },
+				{ title: 'lsj', },
+				{ title: 'lsj', },
+				{ title: 'lsj', },
+			]
+		}
+	},
 
 }
 </script>
