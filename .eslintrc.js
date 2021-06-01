@@ -7,7 +7,7 @@ module.exports = {
 	},
 	'extends': [
 		'plugin:vue/essential',
-		'eslint:recommended'
+		'eslint:recommended',
 		// '@vue/standard'
 	],
 	parserOptions: {
@@ -16,8 +16,8 @@ module.exports = {
 	rules: {
 		// 'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
 		// 'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off'
-		'indent': [ 'error', 'tab' ],
+		'indent': [ 'error', 'tab', { 'SwitchCase': 1 } ],
 		'no-tabs': 0,
-		'no-mixed-spaces-and-tabs': [ 'error', 'smart-tabs' ]
-	}
+		'no-mixed-spaces-and-tabs': [ 'error', 'smart-tabs' ],
+	},
 }
