@@ -1,8 +1,6 @@
 <template lang="pug">
 .home
-	Section
-	Section
-	Section
+	Section(v-for="block in blocks" :heading="block.heading" :badge="block.badge" :items="block.items")
 	LastCards.full
 
 </template>
@@ -17,6 +15,20 @@ export default {
 	data() {
 		return {
 			one: 1,
+			blocks: [
+				{ id: 0, heading: 'Входящие', badge: 3, items: [
+					{ text: 'В работе', },
+					{ text: 'На контроле',  },
+					{ text: 'Ответственное исполнение', },
+				] },
+				{ id: 1, heading: 'Исходящие', badge: 1, items: [
+					{ text: 'Делегировано', },
+					{ text: 'Завершено',  },
+				] },
+				{ id: 2, heading: 'Мои документы', items: [
+					{ text: 'Я - автор', badge: 2 },
+				] },
+			]
 		}
 	},
 }
@@ -30,7 +42,7 @@ export default {
 }
 .full {
 	grid-column: 1/-1;
-	margin-top: 2rem;
+	margin-top: 1rem;
 	
 }
 </style>

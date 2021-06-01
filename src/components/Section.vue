@@ -1,16 +1,17 @@
 <template lang="pug">
 div
 	.hd(v-ripple="{ class: 'info--text' }")
-		span Heading
-		.badge 4
+		span {{ heading }}
+		.badge(v-if="badge") {{ badge }}
 	ul
-		li(v-for="n in 4" v-ripple="{ class: 'info--text' }" )
-			.text text some
-			.badge 4
+		li(v-for="item in items" v-ripple="{ class: 'info--text' }" )
+			.text {{ item.text }}
+			.badge(v-if="item.badge") {{ item.badge }}
 </template>
 
 <script>
 export default {
+	props: ['heading', 'badge', 'items'],
 
 }
 </script>
