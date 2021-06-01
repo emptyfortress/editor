@@ -8,7 +8,7 @@ v-data-table(:headers="headers" :items="items" hide-default-footer hide-default-
 	
 	template(v-slot:body="{ items }")
 		tbody
-			tr(v-for="item in items" :key="item.name" :class="{ unread : item.unread }")
+			tr(v-for="item in items" :key="item.name" :class="{ unread : item.unread }" @click="goto(item)")
 				td.small
 				td {{ item.name }}
 				td {{ item.created }}
@@ -20,6 +20,13 @@ v-data-table(:headers="headers" :items="items" hide-default-footer hide-default-
 <script>
 export default {
 	props: ['headers', 'items'],
+	methods: {
+		goto(e) {
+			if (!e.url) {
+				return
+			} else this.$router.push(e.url)
+		}
+	}
 }
 </script>
 
@@ -43,6 +50,9 @@ export default {
 	&.unread {
 		font-weight: bold;
 	}
+}
+tr {
+	cursor: pointer;
 }
 
 th {

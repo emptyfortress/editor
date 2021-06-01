@@ -3,11 +3,9 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Folder from '@/components/Folder'
 import Task from '@/components/Task'
-import Doc from '@/components/Doc'
-import Doc1 from '@/components/Doc1'
 import Doc2 from '@/components/Doc2'
-import Shared from '@/components/Shared'
 import History from '@/components/History'
+import Shared from '@/components/Shared'
 
 Vue.use(VueRouter)
 
@@ -29,27 +27,11 @@ const routes = [
 		}
 	},
 	{
-		path: '/doc-shared',
+		path: '/docs/1',
 		name: 'doc-shared',
 		component: Shared,
 		meta: {
 			title: 'Документы с общим доступом'
-		}
-	},
-	{
-		path: '/doc',
-		name: 'doc',
-		component: Doc,
-		meta: {
-			title: 'Документы'
-		}
-	},
-	{
-		path: '/doc1',
-		name: 'doc1',
-		component: Doc1,
-		meta: {
-			title: 'Документы'
 		}
 	},
 	{

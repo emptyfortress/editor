@@ -2,7 +2,7 @@
 v-app 
 	SvgSprite
 	Drawer(:maincolor="maincolor")
-	v-app-bar(app :color="maincolor" flat clipped-left elevation="2" ).pr-2
+	v-app-bar(app :color="maincolor" flat clipped-left elevation="2" collapse-on-scroll ).pr-2
 		v-app-bar-nav-icon(color="#fff" @click="$store.commit('toggleDrawer')")
 		.logo(v-show="!$vuetify.breakpoint.mobile")
 			span {{ title }}
@@ -46,7 +46,8 @@ v-app
 			.scan(v-ripple)
 				svg-icon(icon="search-scan")
 		v-container.cont
-			router-view
+			v-slide-x-transition(mode="out-in")
+				router-view
 
 </template>
 
@@ -130,6 +131,8 @@ export default {
 .subbar {
 	height: 42px;
 	display: flex;
+	position: sticky;
+	top: 0;
 	.v-btn {
 		height: 42px;
 	}

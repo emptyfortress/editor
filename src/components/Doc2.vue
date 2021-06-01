@@ -7,7 +7,7 @@ div
 		.attr атрибуты
 
 	br
-	<quill-editor ref="myQuillEditor" v-model="content" :options="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)" />
+	quill-editor( ref="myQuillEditor" v-model="content" :options="editorOption" @blur="onEditorBlur($event)" @focus="onEditorFocus($event)" @ready="onEditorReady($event)" )
 </template>
 
 <script>
@@ -19,11 +19,24 @@ import { quillEditor } from 'vue-quill-editor'
 
 export default {
 	data() {
-		return {}
+		return {
+			content: 'fuck'
+		}
 	},
 	components: {
 		quillEditor,
 	},
+	methods: {
+		onEditorFocus($event) {
+			console.log($event)
+			this.$refs.myQuillEditor.$el.classList.add('editor')
+		},
+
+		onEditorBlur($event) {
+			console.log($event)
+			this.$refs.myQuillEditor.$el.classList.remove('editor')
+		}
+	}
 }
 </script>
 
