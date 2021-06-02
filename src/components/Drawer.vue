@@ -1,21 +1,32 @@
 <template lang="pug">
-v-navigation-drawer(v-model="drawer" dark :color="maincolor" clipped app :mini-variant.sync="mini" width="310")
+v-navigation-drawer(
+	v-model='drawer',
+	dark,
+	:color='maincolor',
+	clipped,
+	app,
+	:mini-variant.sync='mini',
+	width='310'
+)
 	v-list
-		v-list-item(link @click="goTo(item.url)" v-for="item in menu" :key="item.id"
-			:class="path === item.url ? 'active' : ''")
+		v-list-item(
+			link,
+			@click='goTo(item.url)',
+			v-for='item in menu',
+			:key='item.id',
+			:class='path === item.url ? "active" : ""'
+		)
 			v-list-item-icon
 				v-icon {{ item.icon }}
 			v-list-item-content
 				v-list-item-title {{ item.text }}
 
-	v-btn.mini(@click="toggleMini" icon)
-		v-icon(v-if="!mini") mdi-backburger
+	v-btn.mini(@click='toggleMini', icon)
+		v-icon(v-if='!mini') mdi-backburger
 		v-icon(v-else) mdi-forwardburger
-
 </template>
 
 <script>
-
 export default {
 	props: ['maincolor'],
 	data() {
@@ -27,9 +38,19 @@ export default {
 			menu: [
 				{ id: 0, url: '/', icon: 'mdi-home-roof', text: 'Главная' },
 				{ id: 1, url: '/folder', icon: 'mdi-magnify', text: 'Поиск' },
-				{ id: 2, url: '/history', icon: 'mdi-history', text: 'Последние карточки' },
-				{ id: 3, url: '/task', icon: '', text: 'МОИ ЗАДАНИЯ' },
-				{ id: 4, url: '/doc2', icon: '', text: 'МОИ ДОКУМЕНТЫ' },
+				{
+					id: 2,
+					url: '/history',
+					icon: 'mdi-history',
+					text: 'Последние карточки',
+				},
+				{ id: 3, url: '/task', icon: 'mdi-check-bold', text: 'МОИ ЗАДАНИЯ' },
+				{
+					id: 4,
+					url: '/doc2',
+					icon: 'mdi-file-document-outline',
+					text: 'МОИ ДОКУМЕНТЫ',
+				},
 			],
 		}
 	},
@@ -59,28 +80,25 @@ export default {
 			get() {
 				return this.$store.getters.mini
 			},
-			set () {},
+			set() {},
 		},
 	},
-	components: {
-	},
+	components: {},
 }
-
 </script>
 
 <style scoped lang="scss">
 .theme--dark.v-list {
 	background: transparent;
-
 }
 .mini {
 	position: absolute;
 	bottom: 1rem;
-	left: .5rem;
+	left: 0.5rem;
 	cursor: pointer;
 }
 .min {
-	font-size: .9rem;
+	font-size: 0.9rem;
 }
 .ic {
 	font-size: 1.3rem;
@@ -94,13 +112,13 @@ export default {
 	margin-right: 0;
 }
 .theme--light .active {
-	background: rgba(0,0,0,.1);
+	background: rgba(0, 0, 0, 0.1);
 	color: black;
 }
 .theme--dark .active {
-	background: rgba(255,255,255,.07);
+	background: rgba(255, 255, 255, 0.07);
 }
-	.v-list-item {
-		border-bottom: 1px solid rgba(0,0,0, .3);
-	}
+.v-list-item {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}
 </style>

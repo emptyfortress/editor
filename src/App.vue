@@ -54,11 +54,12 @@ v-app
 			v-icon mdi-help-circle-outline
 	v-main(v-scroll='handleScroll')
 		.subbar(:class='maincolor')
-			v-btn(dark, depressed, tile, :color='create')
-				v-icon mdi-plus
-				span Создать
-			.scan(v-ripple)
-				svg-icon(icon='search-scan')
+			.tools(:class='{ away: editMode }')
+				v-btn(dark, depressed, tile, :color='create')
+					v-icon mdi-plus
+					span Создать
+				.scan(v-ripple)
+					svg-icon(icon='search-scan')
 		v-container.cont
 			v-slide-x-transition(mode='out-in')
 				router-view
@@ -80,6 +81,9 @@ export default {
 		scroll: true,
 	}),
 	computed: {
+		editMode() {
+			return this.$store.getters.editMode
+		},
 		create() {
 			switch (this.maincolor) {
 				case 'docolor':
@@ -180,9 +184,15 @@ export default {
 }
 .subbar {
 	height: 42px;
-	display: flex;
-	.v-btn {
-		height: 42px;
+	.tools {
+		display: flex;
+		transition: 0.3s ease all;
+		&.away {
+			transform: translateY(-50px);
+		}
+		.v-btn {
+			height: 42px;
+		}
 	}
 }
 .sticky {

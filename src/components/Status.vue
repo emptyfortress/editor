@@ -11,7 +11,7 @@ export default {
 
 <style scoped lang="scss">
 .stat {
-	display: inline-block;
+	/* display: inline-block; */
 	font-size: 1rem;
 	white-space: nowrap;
 	span {

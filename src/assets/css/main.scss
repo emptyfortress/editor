@@ -18,16 +18,23 @@
 	}
 }
 .editor .ql-toolbar.ql-snow {
-	display: block;
+	// display: block;
 }
 .ql-toolbar.ql-snow {
-	display: none;
+	position: absolute;
+	top: 100px;
+	left: 0;
+	// display: none;
 }
 .ql-editor {
 	background: #fff;
 }
 
 .theme--light.v-tabs > .v-tabs-bar {
+	background: transparent;
+	border-bottom: 1px solid #ccc;
+}
+.theme--light.v-tabs-items {
 	background: transparent;
 }
 .mytab {

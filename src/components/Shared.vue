@@ -4,9 +4,21 @@
 	.status
 		Status(title='Не начато')
 	.zag
-		v-btn.star(icon, small)
-			v-icon mdi-star-outline
+		v-btn.star(
+			icon,
+			small,
+			@click='starred = !starred',
+			:class='{ starred: starred }'
+		)
+			v-icon(v-if='!starred') mdi-star-outline
+			v-icon(v-else) mdi-star
 		| Проект договора об организации питания туристических групп
+		v-btn.ml-4(icon, small)
+			v-icon mdi-reload
+		v-btn(icon, small, @click='toggleEditMode')
+			v-icon mdi-pencil
+		v-btn(icon, small)
+			v-icon mdi-trash-can-outline
 	.but
 		v-btn(
 			depressed,
@@ -16,35 +28,41 @@
 			dark
 		) {{ button.label }}
 		MoreBt(:items='actions')
-		//- v-btn(icon)
-		//- 	v-icon mdi-dots-horizontal
 
 	v-tabs.mytab(v-model='tt')
 		v-tab Главная
 		v-tab Ход согласования
 		v-tab-item(key='1')
-			p main tab
+			MainTab
 		v-tab-item(key='2')
 			p hod sogl
-
-	//- div
-		h1 laksj
-		br
-		p(v-for='n in 50') Давно выяснено, что при оценке дизайна и композиции читаемый текст мешает сосредоточиться. Lorem Ipsum используют потому, что тот обеспечивает более или менее стандартное заполнение шаблона, а также реальное распределение букв и пробелов в абзацах, которое не получается при простой дубликации "Здесь ваш текст.. Здесь ваш текст.. Здесь ваш текст.." Многие программы электронной вёрстки и редакторы HTML используют Lorem Ipsum в качестве текста по умолчанию, так что поиск по ключевым словам "lorem ipsum" сразу показывает, как много веб-страниц всё ещё дожидаются своего настоящего рождения. За прошедшие годы текст Lorem Ipsum получил много версий. Некоторые версии появились по ошибке, некоторые - намеренно (например, юмористические варианты).
 </template>
 
 <script>
 import Status from '@/components/Status.vue'
 import MoreBt from '@/components/MoreBt.vue'
+import MainTab from '@/components/MainTab.vue'
 
 export default {
 	components: {
 		Status,
 		MoreBt,
+		MainTab,
+	},
+	computed: {
+		editMode() {
+			return this.$store.getters.editMode
+		},
+	},
+	methods: {
+		toggleEditMode() {
+			this.$store.commit('toggleEditMode')
+		},
 	},
 	data() {
 		return {
 			tt: 0,
+			starred: false,
 			buttons: [
 				{ label: 'В работу', color: 'docolor' },
 				{ label: 'Согласовать', color: 'docolor' },
@@ -90,17 +108,12 @@ export default {
 .mytab {
 	grid-column: 1 / -1;
 }
-@media only screen and (max-width: 960px) {
-	.num,
-	.status {
-		grid-column: 1 / -1;
-	}
-}
 .status {
 	justify-self: end;
 }
 .v-btn:not(:last-child) {
-	margin-right: 5px;
+	margin-right: 3px;
+	margin-bottom: 3px;
 }
 .star {
 	margin-left: 0;
@@ -108,6 +121,18 @@ export default {
 }
 .theme--light.v-btn.v-btn--icon {
 	color: #aaa;
+}
+.theme--light.v-btn.starred.v-btn--icon {
+	color: orange;
+}
+@media only screen and (max-width: 960px) {
+	.num,
+	.status {
+		grid-column: 1 / -1;
+	}
+	.status {
+		justify-self: start;
+	}
 }
 </style>
 
