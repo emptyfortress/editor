@@ -12,14 +12,14 @@ v-app
 		:class='calcWidth()'
 	)
 		v-app-bar-nav-icon(color='#fff', @click='$store.commit("toggleDrawer")')
-		.logo(v-show='!$vuetify.breakpoint.mobile')
+		.logo(v-show='scroll')
 			span {{ title }}
 		v-spacer
-		v-btn.mr-3(href='', icon)
+		v-btn.mr-3(href='', icon, v-show='scroll')
 			v-icon(color='#fff') mdi-magnify
 		v-menu(bottom, left)
 			template(v-slot:activator='{ on, attrs }')
-				.rel
+				.rel(v-show='scroll')
 					v-avatar(
 						color='blue lighten-4',
 						size='35',
@@ -50,9 +50,9 @@ v-app
 						img(:src='require(`@/assets/img/user${user}.svg`)')
 					.dot
 
-		v-btn.ml-3(icon, dark)
+		v-btn.ml-3(icon, dark, v-show='scroll')
 			v-icon mdi-help-circle-outline
-	v-main
+	v-main(v-scroll='handleScroll')
 		.subbar(:class='maincolor')
 			v-btn(dark, depressed, tile, :color='create')
 				v-icon mdi-plus
@@ -77,7 +77,7 @@ export default {
 		SvgSprite,
 	},
 	data: () => ({
-		//
+		scroll: true,
 	}),
 	computed: {
 		create() {
@@ -118,12 +118,20 @@ export default {
 			} else return 'Орлов П.С.'
 		},
 	},
+
 	methods: {
+		handleScroll() {
+			if (window.pageYOffset > 0) {
+				this.scroll = false
+			} else if (window.pageYOffset < 40) {
+				this.scroll = true
+			}
+		},
 		calcWidth() {
-			let po = window.pageYOffset
-			if (this.drawer && !this.mini && po > 0) {
+			// let po = window.pageYOffset
+			if (this.drawer && !this.mini) {
 				return 'drawer'
-			} else if (this.drawer && this.mini && po > 0) {
+			} else if (this.drawer && this.mini) {
 				return 'mid'
 			} else return 'sm'
 		},
@@ -146,6 +154,9 @@ export default {
 	}
 	&.mid {
 		max-width: 82px;
+	}
+	&.drawer {
+		max-width: 320px;
 	}
 }
 .v-main {
@@ -170,11 +181,13 @@ export default {
 .subbar {
 	height: 42px;
 	display: flex;
-	position: sticky;
-	top: 0;
 	.v-btn {
 		height: 42px;
 	}
+}
+.sticky {
+	position: sticky;
+	top: 0;
 }
 .menu {
 	width: 200px;

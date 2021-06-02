@@ -31,7 +31,7 @@ const routes = [
 		name: 'doc-shared',
 		component: Shared,
 		meta: {
-			title: 'Документы с общим доступом'
+			title: 'Документ'
 		}
 	},
 	{

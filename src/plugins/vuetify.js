@@ -1,7 +1,7 @@
-import Vue from 'vue';
-import Vuetify from 'vuetify/lib';
+import Vue from 'vue'
+import Vuetify from 'vuetify/lib'
 
-Vue.use(Vuetify);
+Vue.use(Vuetify)
 
 export default new Vuetify({
 	theme: {
@@ -10,8 +10,8 @@ export default new Vuetify({
 				docolor: '#008AD1',
 				taskcolor: '#6DAE50',
 				dark: '#2C4159',
-				link: '#0077CE'
-			}
-		}
-	}
-});
+				link: '#0077CE',
+			},
+		},
+	},
+})
