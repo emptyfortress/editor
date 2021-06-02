@@ -8,9 +8,16 @@
 			v-icon mdi-star-outline
 		| Проект договора об организации питания туристических групп
 	.but
-		v-btn(depressed, v-for='button in buttons', :color='button.color', dark) {{ button.label }}
-		v-btn(icon)
-			v-icon mdi-dots-horizontal
+		v-btn(
+			depressed,
+			v-for='button in buttons',
+			:key='button.label',
+			:color='button.color',
+			dark
+		) {{ button.label }}
+		MoreBt(:items='actions')
+		//- v-btn(icon)
+		//- 	v-icon mdi-dots-horizontal
 
 	v-tabs.mytab(v-model='tt')
 		v-tab Главная
@@ -28,9 +35,12 @@
 
 <script>
 import Status from '@/components/Status.vue'
+import MoreBt from '@/components/MoreBt.vue'
+
 export default {
 	components: {
 		Status,
+		MoreBt,
 	},
 	data() {
 		return {
@@ -41,6 +51,11 @@ export default {
 				{ label: 'Согласовать с замечаниями', color: 'docolor' },
 				{ label: 'Отклонить', color: 'warning' },
 				{ label: 'Делегировать', color: 'docolor' },
+			],
+			actions: [
+				{ title: 'Действие 1' },
+				{ title: 'Действие 2' },
+				{ title: 'Действие 3' },
 			],
 		}
 	},
@@ -71,9 +86,6 @@ export default {
 .but {
 	grid-column: 1 / -1;
 	margin: 0.5rem 0;
-}
-.theme--light.v-tabs > .v-tabs-bar {
-	background: transparent;
 }
 .mytab {
 	grid-column: 1 / -1;
