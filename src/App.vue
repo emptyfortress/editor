@@ -44,6 +44,14 @@ v-app
 							span неактивeн
 					v-list-item-avatar(color='blue lighten-4')
 						v-img(:src='require(`@/assets/img/user${user2}.svg`)')
+				v-list-item(link, two-line, @click='setUser()')
+					v-list-item-content
+						v-list-item-title {{ name2 }}
+						v-list-item-subtitle
+							span.ddot.orange
+							span неактивeн
+					v-list-item-avatar(color='blue lighten-4')
+						v-img(:src='require(`@/assets/img/user${user2}.svg`)')
 			.avat
 				.rel
 					v-avatar(color='blue lighten-4', size='35', v-ripple)
@@ -61,9 +69,10 @@ v-app
 				.scan(v-ripple)
 					svg-icon(icon='search-scan')
 			.editor(:class='{ here: editMode }')
-				v-btn(depressed, dark) Save
-				v-btn(depressed, dark) Save
-				v-btn(depressed, dark) Save
+				v-btn(depressed, dark, small, :color='create') Новый блок
+				v-btn(depressed, dark, small, :color='create') Доступ к блоку
+				v-btn(depressed, dark, small, :color='create') Удалить блок
+				v-btn(depressed, dark, small, :color='create') Сохранить документ
 		v-container.cont
 			v-slide-x-transition(mode='out-in')
 				router-view
@@ -188,6 +197,9 @@ export default {
 }
 .subbar {
 	height: 42px;
+	position: sticky;
+	top: 0;
+	z-index: 1;
 	.tools {
 		display: flex;
 		transition: 0.3s ease all;
@@ -202,11 +214,13 @@ export default {
 		display: flex;
 		transition: 0.3s ease all;
 		transform: translateY(-86px);
+		justify-content: start;
 		&.here {
-			transform: translateY(-44px);
+			transform: translateY(-42px);
 		}
 		.v-btn {
 			height: 42px;
+			margin-right: 3px;
 		}
 	}
 }
