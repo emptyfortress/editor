@@ -3,7 +3,7 @@
 	.num Рабочий
 	.status
 		Status(title='Подготовка')
-	.zag
+	.zag(:contenteditable='editZag')
 		v-btn.star(
 			icon,
 			small,
@@ -15,7 +15,7 @@
 		| Проект договора об организации питания туристических групп
 		v-btn.ml-4(icon)
 			svg-icon(icon='reload')
-		v-btn(icon, @click='toggleEditMode')
+		v-btn(icon, @click='editZag')
 			svg-icon(icon='pencil')
 		v-btn(icon)
 			svg-icon(icon='bin')
@@ -59,14 +59,15 @@ export default {
 		},
 	},
 	methods: {
-		toggleEditMode() {
-			this.$store.commit('toggleEditMode')
+		editZag() {
+			this.editZag = !this.editZag
 		},
 	},
 	data() {
 		return {
 			tt: 0,
 			starred: false,
+			edZag: false,
 			buttons: [
 				{ label: 'На согласование', color: 'docolor' },
 				{ label: 'Печать', color: 'docolor', icon: 'mdi-printer' },

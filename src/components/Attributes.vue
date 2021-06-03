@@ -1,59 +1,56 @@
 <template lang="pug">
-//- v-expansion-panels
-	v-expansion-panel(v-for='(item, i) in 5', :key='i')
-		v-expansion-panel-header Item
-		v-expansion-panel-content
-			p lkajsldkj laksjd laksj laks
-
 v-expansion-panels(tile, flat, v-model='panels', multiple, name='main')
-	v-expansion-panel
+	v-expansion-panel(value='1')
 		v-expansion-panel-header
 			.blockhd.rel Информация
-			//- v-tooltip(top)
-				template(v-slot:activator='{ on }')
-					v-btn.test(icon, v-on='on', @click.stop='toggleAll', small)
-						v-icon mdi-unfold-more-horizontal
-				span Свернуть/развернуть все
 		v-expansion-panel-content
-			.descr Детальный план ввода в эксплуатацию автоматизированной информационной системы государственного заказа Санкт-Петербурга на периода март-май 2020 г.
+			.descr
+				template(v-for='item in items')
+					span.lab {{ item.label }}:
+					span.val {{ item.value }}
 
-	v-expansion-panel
+	v-expansion-panel(value='2')
 		v-expansion-panel-header
 			.blockhd.rel Ссылки (2)
-				//- v-btn.scan(@click.stop='', icon)
-				//- 	v-icon mdi-plus
-				//- v-btn.plus(@click.stop='', icon)
-				//- 	i.icon-setup
 		v-expansion-panel-content
-			v-simple-table.nopad.lin(dense)
+			v-simple-table.nopad(dense)
 				thead
 					tr
 						th Вид
 						th Имя
 						th Тип
 						th
+						th
 				tbody
 					tr(v-for='item in links', :key='item.id')
 						td
-							i.icon-card.mr-2
+							svg-icon(icon='cardv')
 						td.lin {{ item.name }}
 						td {{ item.type }}
 						td.px-0.text-right
 							v-btn(icon, small)
 								v-icon(color='link') mdi-information
+						td.px-0.text-right
 							v-btn(icon, small)
 								v-icon mdi-dots-vertical
 </template>
 
 <script>
 export default {
+	props: ['full'],
 	data() {
 		return {
+			panels: [0],
+			items: [
+				{ id: 0, label: 'Рег.дата', value: '31.05.2021' },
+				{ id: 1, label: 'Подготовил', value: 'Карачева О.' },
+				{ id: 2, label: 'Согласуют', value: 'Орлов П.С., Гусева К.А.' },
+			],
 			links: [
 				{
 					id: 0,
 					fio: 'Иванов Г.',
-					name: 'Исходящее письмо №564-3/3, Иванов Г.И. О пряниках',
+					name: 'Исходящее письмо №564-3/3, Иванов Г.И. Обеды в кафе',
 					type: 'В ответ на',
 				},
 				{
@@ -85,5 +82,26 @@ export default {
 	font-weight: 600;
 	letter-spacing: 0.15rem;
 	color: $primary;
+}
+.nopad {
+	th {
+		text-align: left;
+		padding: 0 5px !important;
+	}
+	td {
+		padding: 0 5px !important;
+		&.lin {
+			color: $link;
+		}
+	}
+}
+.descr {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 5px 15px;
+	font-size: 0.9rem;
+	.lab {
+		color: #666;
+	}
 }
 </style>

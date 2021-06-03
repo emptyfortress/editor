@@ -1,29 +1,34 @@
 <template lang="pug">
 .grd
 	.main.elevation-2(:class='{ full: full }')
-		v-btn.expand(icon, @click='toggleFull', small)
-			svg-icon.rem(icon='expand', v-if='!full')
-			svg-icon.rem(icon='collapse', v-else)
-	.attr
-		Attributes
-		//- v-btn.expand(icon, @click='toggleFull', small)
-			svg-icon.rem(icon='expand', v-if='!full')
-			svg-icon.rem(icon='collapse', v-else)
+		.expand
+			v-btn(icon, small, @click='toggleEditMode')
+				svg-icon.rem(icon='pencil')
+			v-btn(icon, @click='toggleFull', small)
+				svg-icon.rem(icon='expand', v-if='!full')
+				svg-icon.rem(icon='collapse', v-else)
+		Editor
+	.attr(:class='{ full: full }')
+		Attributes(:full='full')
 </template>
 
 <script>
 import Attributes from '@/components/Attributes.vue'
+import Editor from '@/components/Editor.vue'
+
 export default {
-	components: { Attributes },
+	components: { Attributes, Editor },
 	data() {
 		return {
 			full: false,
-			panels: [1, 2],
 		}
 	},
 	methods: {
 		toggleFull() {
 			this.full = !this.full
+		},
+		toggleEditMode() {
+			this.$store.commit('toggleEditMode')
 		},
 	},
 }
@@ -37,19 +42,20 @@ export default {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
 	gap: 1rem;
+	padding-bottom: 3rem;
 }
 .attr {
 	grid-column: 4 / 6;
-	/* background: #ccc; */
-	/* height: 100px; */
 	position: relative;
+	&.full {
+		grid-column: 1 / -1;
+	}
 }
 .main {
 	grid-column: 1 / 4;
 	background: #fff;
 	height: 3100px;
 	position: relative;
-	margin-bottom: 3rem;
 	&.full {
 		grid-column: 1 / -1;
 	}
@@ -68,5 +74,6 @@ export default {
 	position: absolute;
 	top: 0.2rem;
 	right: 0.2rem;
+	z-index: 10;
 }
 </style>

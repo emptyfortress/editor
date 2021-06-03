@@ -60,6 +60,10 @@ v-app
 					span Создать
 				.scan(v-ripple)
 					svg-icon(icon='search-scan')
+			.editor(:class='{ here: editMode }')
+				v-btn(depressed, dark) Save
+				v-btn(depressed, dark) Save
+				v-btn(depressed, dark) Save
 		v-container.cont
 			v-slide-x-transition(mode='out-in')
 				router-view
@@ -189,6 +193,17 @@ export default {
 		transition: 0.3s ease all;
 		&.away {
 			transform: translateY(-50px);
+		}
+		.v-btn {
+			height: 42px;
+		}
+	}
+	.editor {
+		display: flex;
+		transition: 0.3s ease all;
+		transform: translateY(-86px);
+		&.here {
+			transform: translateY(-44px);
 		}
 		.v-btn {
 			height: 42px;
