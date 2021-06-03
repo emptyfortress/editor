@@ -236,5 +236,8 @@ export default {
 	color: #fff;
 	cursor: pointer;
 	padding: 0 1rem;
+	svg.icon {
+		font-size: 2rem;
+	}
 }
 </style>

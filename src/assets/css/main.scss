@@ -21,9 +21,9 @@
 	// display: block;
 }
 .ql-toolbar.ql-snow {
-	position: absolute;
-	top: 100px;
-	left: 0;
+	// position: absolute;
+	// top: 100px;
+	// left: 0;
 	// display: none;
 }
 .ql-editor {
@@ -49,4 +49,32 @@
 		// color: #000;
 		font-weight: 600;
 	}
+}
+svg.icon {
+	font-size: 1.5rem;
+}
+svg.icon.rem {
+	font-size: 1rem;
+}
+.theme--light.v-expansion-panels .v-expansion-panel {
+	border-bottom: 1px solid #ccc;
+	background: transparent;
+	&::before {
+		box-shadow: none;
+	}
+}
+// .theme--light.v-expansion-panels .v-expansion-panel--active {
+// 	background: #fff;
+// 	border: 1px solid #ccc;
+// }
+// .v-application--is-ltr .v-expansion-panel-header__icon {
+// 	order: -1;
+// 	margin-right: 0.5rem;
+// 	flex-shrink: 1;
+// }
+.v-expansion-panel-header > *:not(.v-expansion-panel-header__icon) {
+	flex: 0 0 auto;
+}
+.norightmargin .v-expansion-panel-content__wrap {
+	padding: 0 0 16px 24px;
 }

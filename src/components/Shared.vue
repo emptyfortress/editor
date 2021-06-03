@@ -1,8 +1,8 @@
 <template lang="pug">
 .grid
-	.num Вх. 345-3/3
+	.num Рабочий
 	.status
-		Status(title='Не начато')
+		Status(title='Подготовка')
 	.zag
 		v-btn.star(
 			icon,
@@ -13,12 +13,12 @@
 			v-icon(v-if='!starred') mdi-star-outline
 			v-icon(v-else) mdi-star
 		| Проект договора об организации питания туристических групп
-		v-btn.ml-4(icon, small)
-			v-icon mdi-reload
-		v-btn(icon, small, @click='toggleEditMode')
-			v-icon mdi-pencil
-		v-btn(icon, small)
-			v-icon mdi-trash-can-outline
+		v-btn.ml-4(icon)
+			svg-icon(icon='reload')
+		v-btn(icon, @click='toggleEditMode')
+			svg-icon(icon='pencil')
+		v-btn(icon)
+			svg-icon(icon='bin')
 	.but
 		v-btn(
 			depressed,
@@ -26,7 +26,9 @@
 			:key='button.label',
 			:color='button.color',
 			dark
-		) {{ button.label }}
+		)
+			| {{ button.label }}
+			v-icon.ml-2(v-if='button.icon') mdi-printer
 		MoreBt(:items='actions')
 
 	v-tabs.mytab(v-model='tt')
@@ -35,19 +37,21 @@
 		v-tab-item(key='1')
 			MainTab
 		v-tab-item(key='2')
-			p hod sogl
+			Hod
 </template>
 
 <script>
 import Status from '@/components/Status.vue'
 import MoreBt from '@/components/MoreBt.vue'
 import MainTab from '@/components/MainTab.vue'
+import Hod from '@/components/Hod.vue'
 
 export default {
 	components: {
 		Status,
 		MoreBt,
 		MainTab,
+		Hod,
 	},
 	computed: {
 		editMode() {
@@ -64,11 +68,13 @@ export default {
 			tt: 0,
 			starred: false,
 			buttons: [
-				{ label: 'В работу', color: 'docolor' },
-				{ label: 'Согласовать', color: 'docolor' },
-				{ label: 'Согласовать с замечаниями', color: 'docolor' },
-				{ label: 'Отклонить', color: 'warning' },
-				{ label: 'Делегировать', color: 'docolor' },
+				{ label: 'На согласование', color: 'docolor' },
+				{ label: 'Печать', color: 'docolor', icon: 'mdi-printer' },
+				// { label: 'В работу', color: 'docolor' },
+				// { label: 'Согласовать', color: 'docolor' },
+				// { label: 'Согласовать с замечаниями', color: 'docolor' },
+				// { label: 'Отклонить', color: 'warning' },
+				// { label: 'Делегировать', color: 'docolor' },
 			],
 			actions: [
 				{ title: 'Действие 1' },
@@ -115,7 +121,7 @@ export default {
 	margin-right: 3px;
 	margin-bottom: 3px;
 }
-.star {
+.zag .v-btn.star {
 	margin-left: 0;
 	margin-right: 5px;
 }
@@ -133,6 +139,9 @@ export default {
 	.status {
 		justify-self: start;
 	}
+}
+.zag .v-btn {
+	margin: 0;
 }
 </style>
 

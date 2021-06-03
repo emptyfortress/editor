@@ -15,6 +15,15 @@ div
 		@focus='onEditorFocus($event)',
 		@ready='onEditorReady($event)'
 	)
+
+	quill-editor(
+		ref='myQuillEditor',
+		v-model='content1',
+		:options='editorOption',
+		@blur='onEditorBlur($event)',
+		@focus='onEditorFocus($event)',
+		@ready='onEditorReady($event)'
+	)
 </template>
 
 <script>
@@ -28,6 +37,7 @@ export default {
 	data() {
 		return {
 			content: 'fuck',
+			content1: 'laksjlkaj laksj lkajs lkj ',
 		}
 	},
 	components: {
