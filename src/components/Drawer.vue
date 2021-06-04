@@ -121,4 +121,7 @@ export default {
 .v-list-item {
 	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
+.v-navigation-drawer--clipped:not(.v-navigation-drawer--temporary):not(.v-navigation-drawer--is-mobile) {
+	z-index: 0;
+}
 </style>

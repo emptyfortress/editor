@@ -1,5 +1,5 @@
 <template lang="pug">
-div
+.ma-3
 	quill-editor.editor(
 		ref='myTextEditor',
 		:content='content',

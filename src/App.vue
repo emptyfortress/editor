@@ -30,38 +30,24 @@ v-app
 						img(:src='require(`@/assets/img/user${user}.svg`)')
 					.dot
 			v-list.menu
-				v-list-item(link, two-line)
+				v-list-item(
+					link,
+					two-line,
+					v-for='men in users',
+					@click='setActiveUser(men.id)'
+				)
 					v-list-item-content
-						v-list-item-title {{ name1 }}
+						v-list-item-title {{ men.name }}
 						v-list-item-subtitle
 							span.ddot
 							span активен
-				v-list-item(link, two-line, @click='setUser()')
-					v-list-item-content
-						v-list-item-title {{ name2 }}
-						v-list-item-subtitle
-							span.ddot.orange
-							span неактивeн
 					v-list-item-avatar(color='blue lighten-4')
-						v-img(:src='require(`@/assets/img/user${user2}.svg`)')
-				v-list-item(link, two-line, @click='setUser()')
-					v-list-item-content
-						v-list-item-title {{ name2 }}
-						v-list-item-subtitle
-							span.ddot.orange
-							span неактивeн
-					v-list-item-avatar(color='blue lighten-4')
-						v-img(:src='require(`@/assets/img/user${user2}.svg`)')
-			.avat
-				.rel
-					v-avatar(color='blue lighten-4', size='35', v-ripple)
-						img(:src='require(`@/assets/img/user${user}.svg`)')
-					.dot
+						v-img(:src='require(`@/assets/img/user${men.id}.svg`)')
 
 		v-btn.ml-3(icon, dark, v-show='scroll')
 			v-icon mdi-help-circle-outline
 	v-main(v-scroll='handleScroll')
-		.subbar(:class='maincolor')
+		.subbar(:class='calcBar')
 			.tools(:class='{ away: editMode }')
 				v-btn(dark, depressed, tile, :color='create')
 					v-icon mdi-plus
@@ -92,8 +78,34 @@ export default {
 	},
 	data: () => ({
 		scroll: true,
+		users: [
+			{ id: 0, name: 'Орлов П.С.' },
+			{ id: 1, name: 'Гусева К.А.' },
+			{ id: 17, name: 'Чайка С.В.' },
+		],
 	}),
 	computed: {
+		calcBar() {
+			if (this.editMode) {
+				switch (this.maincolor) {
+					case 'docolor':
+						return 'docolor stick'
+					case 'taskcolor':
+						return 'taskcolor stick'
+					default:
+						return 'dark stick'
+				}
+			} else if (!this.editMode) {
+				switch (this.maincolor) {
+					case 'docolor':
+						return 'docolor'
+					case 'taskcolor':
+						return 'taskcolor'
+					default:
+						return 'dark'
+				}
+			} else return 'dark'
+		},
 		editMode() {
 			return this.$store.getters.editMode
 		},
@@ -119,21 +131,6 @@ export default {
 		user() {
 			return this.$store.getters.user
 		},
-		user2() {
-			if (this.user === 0) {
-				return 1
-			} else return 0
-		},
-		name1() {
-			if (this.user === 0) {
-				return 'Орлов П.С.'
-			} else return 'Гусева К.А.'
-		},
-		name2() {
-			if (this.user === 0) {
-				return 'Гусева К.А.'
-			} else return 'Орлов П.С.'
-		},
 	},
 
 	methods: {
@@ -152,10 +149,8 @@ export default {
 				return 'mid'
 			} else return 'sm'
 		},
-		setUser() {
-			if (this.user === 0) {
-				this.$store.commit('setUser', 1)
-			} else this.$store.commit('setUser', 0)
+		setActiveUser(e) {
+			this.$store.commit('setUser', e)
 		},
 	},
 }
@@ -197,14 +192,16 @@ export default {
 }
 .subbar {
 	height: 42px;
-	position: sticky;
-	top: 0;
-	z-index: 1;
+	z-index: 3;
+	&.stick {
+		position: sticky;
+		top: 0;
+	}
 	.tools {
 		display: flex;
 		transition: 0.3s ease all;
 		&.away {
-			transform: translateY(-50px);
+			transform: translateY(-150px);
 		}
 		.v-btn {
 			height: 42px;
@@ -213,7 +210,7 @@ export default {
 	.editor {
 		display: flex;
 		transition: 0.3s ease all;
-		transform: translateY(-86px);
+		transform: translateY(-150px);
 		justify-content: start;
 		&.here {
 			transform: translateY(-42px);
