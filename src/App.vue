@@ -151,6 +151,7 @@ export default {
 		},
 		setActiveUser(e) {
 			this.$store.commit('setUser', e)
+			this.$store.commit('setEditMode', false)
 		},
 	},
 }
