@@ -1,13 +1,33 @@
 <template lang="pug">
 .ma-3
-	quill-editor.editor(
-		ref='myTextEditor',
-		:content='content',
+	quill-editor(
+		ref='block1',
+		:content='content1',
 		:options='editorOption',
 		@change='onEditorChange($event)'
 	)
 		.output.ql-bubble
-			.ql-editor(v-html='content')
+			.ql-editor(v-html='content1')
+	
+
+	quill-editor(
+		ref='block2',
+		:content='content2',
+		:options='editorOption',
+		@change='onEditorChange($event)'
+	)
+		.output.ql-bubble
+			.ql-editor(v-html='content2')
+
+
+	quill-editor(
+		ref='block3',
+		:content='content3',
+		:options='editorOption',
+		@change='onEditorChange($event)'
+	)
+		.output.ql-bubble
+			.ql-editor(v-html='content3')
 	.another
 </template>
 
@@ -21,21 +41,56 @@ export default {
 		quillEditor,
 	},
 	computed: {
+		user () {
+			return this.$store.getters.user
+		},
 		editMode() {
 			return this.$store.getters.editMode
 		},
-		editor() {
-			return this.$refs.myTextEditor.quill
+		editor1() {
+			return this.$refs.block1.quill
+		},
+		editor2() {
+			return this.$refs.block2.quill
+		},
+		editor3() {
+			return this.$refs.block3.quill
 		},
 	},
 	mounted() {
-		this.editor.enable(false)
+		this.editor1.enable(false)
+		this.editor2.enable(false)
+		this.editor3.enable(false)
 	},
 	watch:  {
 		editMode: function (newval) {
 			if ( newval === true ) {
-				this.editor.enable()
-			} else this.editor.enable(false)
+				switch (this.user) {
+					case 0:
+					 this.editor1.enable()
+					 this.editor2.enable()
+					 this.editor3.enable()
+					 break
+					case 1:
+					 this.editor1.enable(false)
+					 this.editor2.enable()
+					 this.editor3.enable(false)
+					 break
+					case 17:
+					 this.editor1.enable(false)
+					 this.editor2.enable(false)
+					 this.editor3.enable()
+					 break
+					default:
+					 this.editor1.enable()
+					 this.editor2.enable()
+					 this.editor3.enable()
+					 break
+				}
+			} else {
+			 this.editor1.enable(false)
+			 this.editor2.enable(false)
+			}
 		}
 	},
 	data() {
@@ -56,8 +111,26 @@ export default {
 					],
 				},
 			},
-			content: `
-          <h1 class="ql-align-center"><s class="ql-font-serif">I am bubble example!</s></h1><p><br></p><p><span class="ql-font-serif">Whenever you play the game of thrones, you either win or die. There is no middle ground.</span></p><p><strong class="ql-font-serif">Some war against sword and spear to win, and the others the crow and the paper to win.</strong></p><p><br></p><p><u class="ql-font-serif">Dead history is write in ink, the living sort in blood.</u></p><p><em class="ql-font-serif">They're only numbers. Numbers on paper. Once you understand that, it's easy to make them behave.</em></p><p><br></p><p><span class="ql-font-serif">Every time we deal with an enemy, we create two more.</span></p><p><span class="ql-font-serif">So the king has decreed. The small council consents.</span></p><p><br></p><p><span class="ql-font-serif">Chaos not is a pit, chaos is a ladder.</span></p><p><span class="ql-font-serif">A chain needs all sorts of metals, and a land needs all sorts of people.</span></p><p><br></p><p><span class="ql-font-serif">When the snows fall and the white winds blow, the lone wolf dies, but the pack survives.</span></p>
+			content3: `
+			<h4>Оплата по договору</h4>
+			<ol><li>Оплата услуг по договору производится по ценам, указанным в Приложении № 1, безналичным образом, если стороны не предусмотрят иной способ оплаты.</li><li>Срок оплаты - 7 банковских дней с момента проведения мероприятия при расчете в рублях, 7 банковских дней с момента проведения мероприятия при расчете в иностранной валюте.</li><li>Питание индивидуальных туристов может быть оплачено наличным образом.</li><li>Допускается внесение Заказчиком предварительной оплаты в счет стоимости услуг, которые будут оказаны по настоящему договору в будущем.</li></ol>
+			`,
+			content2: `
+			<h4>Оплата по договору</h4>
+			<ol><li>Оплата услуг по договору производится по ценам, указанным в Приложении № 1, безналичным образом, если стороны не предусмотрят иной способ оплаты.</li><li>Срок оплаты - 7 банковских дней с момента проведения мероприятия при расчете в рублях, 7 банковских дней с момента проведения мероприятия при расчете в иностранной валюте.</li><li>Питание индивидуальных туристов может быть оплачено наличным образом.</li><li>Допускается внесение Заказчиком предварительной оплаты в счет стоимости услуг, которые будут оказаны по настоящему договору в будущем.</li></ol>
+			`,
+			content1: `
+			<h2 class="ql-align-center">Договор</h2>
+			<p>ООО "Трактир Сельская кухня", именуемое - "Исполнитель и/или Ресторан" с одной стороны и ООО "Вокруг света", именуемое далее - "Заказчик", с другой стороны, заключили настоящий договор о нижеследующем: </p>
+			<br/>
+			<h4>Предмет договора</h4>
+			<ol>
+			<li>Согласно настоящему договору Ресторан принимает на себя
+			обязанности по организации обедов и ужинов для туристических групп и
+			индивидуальных туристов, а Заказчик обязуется оплатить данные услуги.</li>
+			<li>Исполнитель обязуется оказать услуги лично.</li>
+			<li>Объем услуг по настоящему договору на момент его заключения не определен, и формируется из заявок Заказчика по тарифам, указанным в меню - Приложении № 1.</li>
+			</ol>
         `,
 		}
 	},
@@ -70,5 +143,8 @@ export default {
 	height: 200px;
 	border: 2px dotted #ccc;
 	background: #eee;
+}
+p {
+	font-size: 1.3rem;
 }
 </style>
