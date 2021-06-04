@@ -1,6 +1,6 @@
 <template lang="pug">
 .grd
-	.main.elevation-2(:class='{ full: full }')
+	.main.elevation-2(:class='calcClass')
 		.expand
 			v-btn(icon, small, @click='toggleEditMode')
 				svg-icon.rem(icon='pencil')
@@ -22,6 +22,20 @@ export default {
 		return {
 			full: false,
 		}
+	},
+	computed: {
+		editMode() {
+			return this.$store.getters.editMode
+		},
+		calcClass() {
+			if (this.full && this.editMode) {
+				return 'full edit'
+			} else if (this.editMode) {
+				return 'edit'
+			} else if (this.full) {
+				return 'full'
+			} else return ''
+		},
 	},
 	methods: {
 		toggleFull() {
@@ -58,6 +72,10 @@ export default {
 	position: relative;
 	&.full {
 		grid-column: 1 / -1;
+	}
+	&.edit {
+		/* border: 3px solid pink; */
+		outline: 5px solid pink;
 	}
 }
 .grey {

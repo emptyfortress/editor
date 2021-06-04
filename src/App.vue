@@ -212,6 +212,7 @@ export default {
 		transition: 0.3s ease all;
 		transform: translateY(-150px);
 		justify-content: start;
+		margin-left: 1rem;
 		&.here {
 			transform: translateY(-42px);
 		}
