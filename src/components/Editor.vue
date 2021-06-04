@@ -1,34 +1,21 @@
 <template lang="pug">
 .ma-3
-	quill-editor(
-		ref='block1',
-		:content='content1',
-		:options='editorOption',
-		@change='onEditorChange($event)'
-	)
-		.output.ql-bubble
-			.ql-editor(v-html='content1')
+	quill-editor( ref='block1', :content='content1', :options='editorOption',
+	:class="checkUser(1)")
 	
-
 	quill-editor(
 		ref='block2',
 		:content='content2',
 		:options='editorOption',
-		@change='onEditorChange($event)'
+		:class="checkUser(2)"
 	)
-		.output.ql-bubble
-			.ql-editor(v-html='content2')
-
 
 	quill-editor(
 		ref='block3',
 		:content='content3',
 		:options='editorOption',
-		@change='onEditorChange($event)'
+		:class="checkUser(3)"
 	)
-		.output.ql-bubble
-			.ql-editor(v-html='content3')
-	.another
 </template>
 
 <script>
@@ -39,6 +26,20 @@ import 'quill/dist/quill.bubble.css'
 export default {
 	components: {
 		quillEditor,
+	},
+	methods: {
+		checkUser (e) {
+			switch (this.user) {
+				case 1:
+					if (e === 3) { return 'dis' }
+					break;
+				case 17:
+					if (e === 2) { return 'dis' }
+					break;
+				default:
+					return ''
+			}
+		},
 	},
 	computed: {
 		user () {
@@ -138,13 +139,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '@/assets/css/colors';
-.another {
-	height: 200px;
-	border: 2px dotted #ccc;
-	background: #eee;
-}
-p {
-	font-size: 1.3rem;
-}
+/* @import '@/assets/css/colors'; */
 </style>
