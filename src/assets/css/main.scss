@@ -78,3 +78,12 @@ svg.icon.rem {
 .norightmargin .v-expansion-panel-content__wrap {
 	padding: 0 0 16px 24px;
 }
+.ql-bubble .ql-tooltip {
+	z-index: 3;
+	background-color: #004e7f;
+	border-radius: 7px;
+	color: #fff;
+}
+.ql-bubble .ql-stroke {
+	stroke: #cbe9ff;
+}

@@ -2,7 +2,12 @@
 .grd
 	.main.elevation-2(:class='calcClass')
 		.expand
-			v-btn(icon, small, @click='toggleEditMode')
+			v-btn(
+				icon,
+				small,
+				:color='editMode ? "red" : "black"',
+				@click='toggleEditMode'
+			)
 				svg-icon.rem(icon='pencil')
 			v-btn(icon, @click='toggleFull', small)
 				svg-icon.rem(icon='expand', v-if='!full')
@@ -77,10 +82,6 @@ export default {
 		/* border: 3px solid pink; */
 		outline: 5px solid pink;
 	}
-}
-.grey {
-	height: 100px;
-	background: #ccc;
 }
 @media screen and (max-width: 960px) {
 	.main,

@@ -20,6 +20,24 @@ export default {
 	components: {
 		quillEditor,
 	},
+	computed: {
+		editMode() {
+			return this.$store.getters.editMode
+		},
+		editor() {
+			return this.$refs.myTextEditor.quill
+		},
+	},
+	mounted() {
+		this.editor.enable(false)
+	},
+	watch:  {
+		editMode: function (newval) {
+			if ( newval === true ) {
+				this.editor.enable()
+			} else this.editor.enable(false)
+		}
+	},
 	data() {
 		return {
 			editorOption: {
