@@ -78,10 +78,6 @@ export default {
 	&.full {
 		grid-column: 1 / -1;
 	}
-	&.edit {
-		/* border: 3px solid pink; */
-		outline: 5px solid pink;
-	}
 }
 @media screen and (max-width: 960px) {
 	.main,

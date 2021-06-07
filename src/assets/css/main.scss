@@ -94,5 +94,7 @@ svg.icon.rem {
 .edit .quill-editor.dis .ql-editor {
 	opacity: 0.6;
 	background: #eee;
-	border: 2px dotted #ccc;
+}
+.edit .ql-container {
+	outline: 3px solid pink;
 }

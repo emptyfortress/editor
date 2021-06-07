@@ -56,7 +56,7 @@ v-app
 				.scan(v-ripple)
 					svg-icon(icon='search-scan')
 			.editor(:class='{ here: editMode }')
-				v-btn(depressed, dark, small, :color='create') Новый блок
+				v-btn(depressed, dark, small, :color='create' @click="addBlock") Новый блок
 				v-btn(depressed, dark, small, :color='create') Доступ к блоку
 				v-btn(depressed, dark, small, :color='create') Удалить блок
 				v-btn(depressed, dark, small, :color='create') Сохранить документ
@@ -135,6 +135,9 @@ export default {
 	},
 
 	methods: {
+		addBlock() {
+			this.$store.commit('addEdits', {id: 4, ref: 'block4', content: 'test'})
+		},
 		handleScroll() {
 			if (window.pageYOffset > 0) {
 				this.scroll = false
