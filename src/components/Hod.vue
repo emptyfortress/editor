@@ -38,24 +38,16 @@ export default {
 				{
 					icon: 'mdi-account-plus',
 					color: 'primary',
-					fio: 'Дроздова С.П.',
+					fio: 'Орлов П.С.',
 					decision: 'Добавить согласующих',
 					date: '23.12.2020',
 					comment:
-						'Требуется согласование юридического отдела. Указан доп.согласующий Петров Г.М.',
-				},
-				{
-					icon: 'mdi-message-outline',
-					color: 'primary',
-					fio: 'Петров Г.М.',
-					decision: 'Согласовано с замечаниями',
-					date: '23.12.2020',
-					comment: 'Нужно изменить акт',
+						'Требуется согласование юридического отдела. Указан доп.согласующий Чайка С.В.',
 				},
 				{
 					icon: 'mdi-do-not-disturb',
 					color: 'red',
-					fio: 'Синицына А.П.',
+					fio: 'Гусева К.А.',
 					decision: 'Отклонено',
 					date: '23.12.2020',
 					comment: 'Нужно переделать договор',
@@ -63,7 +55,7 @@ export default {
 				{
 					icon: 'mdi-timer-sand-empty',
 					color: 'grey',
-					fio: 'Орлов П.П.',
+					fio: 'Чайка С.В.',
 					decision: 'Ожидает решения',
 					date: '',
 					comment: '',
