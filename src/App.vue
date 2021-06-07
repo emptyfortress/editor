@@ -35,6 +35,7 @@ v-app
 					two-line,
 					v-for='men in users',
 					@click='setActiveUser(men.id)'
+					:key='men.id'
 				)
 					v-list-item-content
 						v-list-item-title {{ men.name }}
@@ -212,7 +213,7 @@ export default {
 		display: flex;
 		transition: 0.3s ease all;
 		transform: translateY(-150px);
-		justify-content: start;
+		justify-content: flex-start;
 		margin-left: 1rem;
 		&.here {
 			transform: translateY(-42px);
