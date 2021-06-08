@@ -66,6 +66,7 @@ v-app
 </template>
 
 <script>
+import { v4 as uuidv4 } from 'uuid'
 import Drawer from './components/Drawer'
 import { maincolor } from '@/components/mixins/maincolor'
 import SvgSprite from '@/components/SvgSprite.vue'
@@ -136,7 +137,7 @@ export default {
 
 	methods: {
 		addBlock() {
-			this.$store.commit('addEdits', {id: 4, ref: 'block4', content: 'test'})
+			this.$store.commit('addEdits', {id: uuidv4(), ref: 'block4', content: ''})
 		},
 		handleScroll() {
 			if (window.pageYOffset > 0) {

@@ -9,6 +9,7 @@ export default new Vuex.Store({
 		mini: false,
 		user: 0,
 		editMode: false,
+		editor: null,
 		edits: [
 			{ id: 1, ref: "block1",
 				content: `
@@ -44,7 +45,8 @@ export default new Vuex.Store({
 		mini: state => { return state.mini },
 		user: state => { return state.user },
 		editMode: state => { return state.editMode },
-		edits: state => { return state.edits }
+		edits: state => { return state.edits },
+		editor: state => { return state.editor },
 	},
 	mutations: {
 		toggleDrawer (state) { state.drawer = !state.drawer },
@@ -53,8 +55,9 @@ export default new Vuex.Store({
 		setEditMode (state, payload) { state.editMode = payload },
 		toggleEditMode (state) { state.editMode = !state.editMode },
 		addEdits (state, payload) {
-			state.edits.splice(1, 0, payload)
+			state.edits.splice(state.editor, 0, payload)
 		},
+		setEditor (state, payload) { state.editor = payload },
 	},
 	actions: {
 	},

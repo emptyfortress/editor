@@ -1,7 +1,10 @@
 <template lang="pug">
 .ma-3
-	quill-editor(:ref='`block${ed.id}`', :content='ed.content', :options='editorOption',
-	:class="checkUser(ed.id)" v-for="ed in edits" :key="ed.id")
+	quill-editor(:ref='`block${ed.id}`',
+		:content='ed.content', :options='editorOption',
+		:class="checkUser(ed.id)" v-for="(ed, i) in edits"
+    @focus='onEditorFocus(i+1)'
+		:key="ed.id")
 	
 </template>
 
@@ -15,13 +18,16 @@ export default {
 		quillEditor,
 	},
 	methods: {
+		onEditorFocus(e) {
+			this.$store.commit('setEditor', e)
+		},
 		checkUser (e) {
 			switch (this.user) {
 				case 1:
 					if (e === 3 || e === 1) { return 'dis' }
 					break;
 				case 17:
-					if (e === 2 || e === 1) { return 'dis' }
+					if (e === 1 || e === 2) { return 'dis' }
 					break;
 				default:
 					return ''
@@ -49,16 +55,11 @@ export default {
 		},
 	},
 	mounted() {
-		// console.log(this.$refs)
 		this.editor1.enable(false)
 		this.editor2.enable(false)
 		this.editor3.enable(false)
-		// this.editor1.focus()
-		// console.log(this.editor1.hasFocus())
 	},
 	watch:  {
-		// activeEditor: function(newval) {
-		// },
 		editMode: function (newval) {
 			if ( newval === true ) {
 				switch (this.user) {
@@ -95,7 +96,7 @@ export default {
 			activeEditor: null,
 			editorOption: {
 				theme: 'bubble',
-				placeholder: 'every contentï¼support html',
+				placeholder: 'Новый блок для текста',
 				modules: {
 					toolbar: [
 						['bold', 'italic', 'underline', 'strike'],

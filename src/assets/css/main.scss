@@ -95,6 +95,23 @@ svg.icon.rem {
 	opacity: 0.6;
 	background: #eee;
 }
+.ql-editor {
+	background: transparent;
+}
+.edit .ql-editor:focus {
+	outline: 5px solid pink;
+	&::after {
+		content: '';
+		background-image: url('../icons/bin.svg');
+		background-size: 24px 24px;
+		width: 24px;
+		height: 24px;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+	}
+}
 .edit .ql-container {
-	outline: 3px solid pink;
+	border: 1px solid pink;
+	position: relative;
 }
