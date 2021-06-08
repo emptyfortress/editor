@@ -231,7 +231,7 @@ export default {
 				{ name: 'Герасимов', group: '', avatar: 12 },
 			],
 			activeEditor: null,
-			share: true,
+			share: false,
 			editorOption: {
 				theme: 'bubble',
 				placeholder: 'Новый блок для текста',
@@ -286,7 +286,7 @@ export default {
 }
 fieldset {
 	padding: 0 1rem;
-	border: 1px solid #ccc;
+	border: 1px solid #aaa;
 	/* border-width: 1px; */
 	/* border-color: #eee; */
 	border-radius: 5px;
