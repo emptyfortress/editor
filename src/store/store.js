@@ -57,6 +57,9 @@ export default new Vuex.Store({
 		addEdits (state, payload) {
 			state.edits.splice(state.editor, 0, payload)
 		},
+		deleteEdits (state) {
+			state.edits.splice(state.editor - 1, 1)
+		},
 		setEditor (state, payload) { state.editor = payload },
 	},
 	actions: {

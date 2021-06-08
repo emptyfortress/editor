@@ -78,6 +78,7 @@ svg.icon.rem {
 .norightmargin .v-expansion-panel-content__wrap {
 	padding: 0 0 16px 24px;
 }
+// vue-quill editor *****************************
 .ql-bubble .ql-tooltip {
 	z-index: 3;
 	background-color: #004e7f;
@@ -91,27 +92,24 @@ svg.icon.rem {
 	font-size: 1rem;
 	font-family: 'Times New Roman', serif;
 }
+.edit .quill-editor.blur .ql-editor {
+	opacity: 0.6;
+	filter: blur(5px);
+	background: #eee;
+}
 .edit .quill-editor.dis .ql-editor {
 	opacity: 0.6;
 	background: #eee;
 }
-.ql-editor {
+.edit .ql-editor {
 	background: transparent;
+}
+.edit .ql-bubble {
+	position: relative;
 }
 .edit .ql-editor:focus {
 	outline: 5px solid pink;
-	&::after {
-		content: '';
-		background-image: url('../icons/bin.svg');
-		background-size: 24px 24px;
-		width: 24px;
-		height: 24px;
-		position: absolute;
-		bottom: 0;
-		right: 0;
-	}
 }
 .edit .ql-container {
 	border: 1px solid pink;
-	position: relative;
 }

@@ -1,14 +1,21 @@
 <template lang="pug">
 .ma-3
-	quill-editor(:ref='`block${ed.id}`',
-		:content='ed.content', :options='editorOption',
-		:class="checkUser(ed.id)" v-for="(ed, i) in edits"
-    @focus='onEditorFocus(i+1)'
-		:key="ed.id")
-	
+	.rel(v-for="(ed, i) in edits")
+		quill-editor(:ref='`block${ed.id}`',
+			:content='ed.content', :options='editorOption',
+			:class="checkUser(ed.id)" 
+			@focus='onEditorFocus(i+1)'
+			:key="ed.id")
+		.action
+			v-icon(@click="addBlock") mdi-plus-circle-outline
+			v-icon() mdi-share-variant
+			v-icon(@click="deleteBlock()") mdi-trash-can-outline
+
+
 </template>
 
 <script>
+import { v4 as uuidv4 } from 'uuid'
 import { quillEditor } from 'vue-quill-editor'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.bubble.css'
@@ -18,16 +25,24 @@ export default {
 		quillEditor,
 	},
 	methods: {
+		deleteBlock() {
+			this.$store.commit('deleteEdits')
+		},
+		addBlock() {
+			this.$store.commit('addEdits', {id: uuidv4(), ref: 'block4', content: ''})
+		},
 		onEditorFocus(e) {
 			this.$store.commit('setEditor', e)
 		},
 		checkUser (e) {
 			switch (this.user) {
 				case 1:
-					if (e === 3 || e === 1) { return 'dis' }
+					if (e === 1) { return 'dis' }
+					else if (e === 3) {return 'blur'}
 					break;
 				case 17:
-					if (e === 1 || e === 2) { return 'dis' }
+					if (e === 2) { return 'blur' }
+					else if (e === 1) {return 'dis'}
 					break;
 				default:
 					return ''
@@ -118,4 +133,27 @@ export default {
 
 <style scoped lang="scss">
 /* @import '@/assets/css/colors'; */
+.action {
+	/* width: 20px; */
+	padding: 4px 10px;
+	background: pink;
+	position: absolute;
+	bottom: -32px;
+	right: -4px;
+	z-index: 2;
+	visibility: hidden;
+	border-radius: 0 0 5px 5px;
+	.v-icon {
+		cursor: pointer;
+		&:hover {
+			color: Maroon;
+		}
+	}
+	.v-icon:not(:last-child) {
+		margin-right: 8px;
+	}
+}
+.rel:focus-within .action {
+	visibility: visible;
+}
 </style>
