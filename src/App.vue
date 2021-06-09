@@ -56,17 +56,16 @@ v-app
 				.scan(v-ripple)
 					svg-icon(icon='search-scan')
 			.editor(:class='{ here: editMode }')
-				v-btn(depressed, dark, small, :color='create' @click="addBlock") Новый блок
-				v-btn(depressed, dark, small, :color='create') Доступ к блоку
-				v-btn(depressed, dark, small, :color='create') Удалить блок
-				v-btn(depressed, dark, small, :color='create') Сохранить документ
+				//- v-btn(depressed, dark, small, :color='create' @click="addBlock") Новый блок
+				//- v-btn(depressed, dark, small, :color='create') Доступ к блоку
+				//- v-btn(depressed, dark, small, :color='create') Удалить блок
+				v-btn(depressed, dark, :color='create' @click="updateEdits") Сохранить документ
 		v-container.cont
 			v-slide-x-transition(mode='out-in')
 				router-view
 </template>
 
 <script>
-import { v4 as uuidv4 } from 'uuid'
 import Drawer from './components/Drawer'
 import { maincolor } from '@/components/mixins/maincolor'
 import SvgSprite from '@/components/SvgSprite.vue'
@@ -136,8 +135,12 @@ export default {
 	},
 
 	methods: {
-		addBlock() {
-			this.$store.commit('addEdits', {id: uuidv4(), ref: 'block4', content: ''})
+		updateEdits() {
+			this.$store.commit('setLoading')
+			setTimeout( () => {
+				this.$store.commit('setEditMode', false)
+				this.$store.commit('setLoading')
+			}, 800 )
 		},
 		handleScroll() {
 			if (window.pageYOffset > 0) {
@@ -147,7 +150,6 @@ export default {
 			}
 		},
 		calcWidth() {
-			// let po = window.pageYOffset
 			if (this.drawer && !this.mini) {
 				return 'drawer'
 			} else if (this.drawer && this.mini) {
@@ -155,8 +157,12 @@ export default {
 			} else return 'sm'
 		},
 		setActiveUser(e) {
+			this.$store.commit('setLoading')
 			this.$store.commit('setUser', e)
 			this.$store.commit('setEditMode', false)
+			setTimeout( () => {
+				this.$store.commit('setLoading')
+			}, 1200 )
 		},
 	},
 }

@@ -92,11 +92,16 @@ svg.icon.rem {
 	font-size: 1rem;
 	font-family: 'Times New Roman', serif;
 }
-.edit .quill-editor.blur .ql-editor {
+.quill-editor.blur .ql-editor {
 	opacity: 0.6;
 	filter: blur(5px);
 	background: #eee;
 }
+// .edit .quill-editor.blur .ql-editor {
+// 	opacity: 0.6;
+// 	filter: blur(5px);
+// 	background: #eee;
+// }
 .edit .quill-editor.dis .ql-editor {
 	opacity: 0.6;
 	background: #eee;

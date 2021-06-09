@@ -5,6 +5,7 @@
 			:content='ed.content', :options='editorOption',
 			:class="checkUser(ed.id)" 
 			@focus='onEditorFocus(i+1)'
+			@change="onEditorChange(i, $event)"
 			:key="ed.id")
 		.action
 			v-icon(@click="addBlock") mdi-plus-circle-outline
@@ -16,7 +17,6 @@
 			v-btn.close(icon @click="share = false" small)
 				v-icon mdi-close
 			v-card-title.text-h6 Доступ к блоку
-			//- v-divider
 			v-card-text
 				v-form.form
 					fieldset
@@ -56,8 +56,8 @@
 
 						v-autocomplete(v-model="enemy" :items="people" chips label="Справочник сотрудников" multiple item-text="name" item-value="name" prepend-icon="mdi-book-open-page-variant")
 							template(v-slot:selection="data")
-								v-chip(v-bind="data.attrs" :input-value="data.selected" close @click="data.select" @click:close="remove(data.item)")
-									v-avatar( left color='blue lighten-4')
+								v-chip(color="blue lighten-4" v-bind="data.attrs" :input-value="data.selected" close @click="data.select" @click:close="remove(data.item)")
+									v-avatar( left color='blue lighten-5')
 										v-img(:src="require(`@/assets/img/user${data.item.avatar}.svg`)")
 									span {{ data.item.name }}
 							
@@ -92,6 +92,12 @@ export default {
 		quillEditor,
 	},
 	methods: {
+	 onEditorChange(e, {html}) {
+			let payload = {}
+			payload.html = html
+			payload.index = e
+			this.$store.commit('updateEdit', payload)
+		},
 		remove (item) {
 			const index = this.friends.indexOf(item.name)
 			if (index >= 0) this.friends.splice(index, 1)
@@ -124,12 +130,32 @@ export default {
 		},
 	},
 	computed: {
+		editor() { return this.$store.getters.editor },
 		edits () { return this.$store.getters.edits },
 		user () { return this.$store.getters.user },
 		editMode() { return this.$store.getters.editMode },
 		editor1() { return this.$refs.block1[0].quill },
 		editor2() { return this.$refs.block2[0].quill },
 		editor3() { return this.$refs.block3[0].quill },
+		enemy() {
+			if (this.editor === 1) {
+				return ['Орлов П.С.']
+			} else if (this.editor === 2) {
+				return ['Орлов П.С.', 'Гусева К.А.'] 
+			} else if (this.editor === 3) {
+				return ['Орлов П.С.', 'Чайка С.В.']
+			} else return []
+		},
+		friends() {
+			if (this.editor === 1) {
+				return ['Орлов П.С.', 'Гусева К.А.', 'Чайка С.В.']
+			} else if (this.editor === 2) {
+				return ['Орлов П.С.', 'Гусева К.А.'] 
+			} else if (this.editor === 3) {
+				return ['Орлов П.С.', 'Чайка С.В.']
+			} else return []
+			
+		}
 	},
 	mounted() {
 		this.editor1.enable(false)
@@ -170,10 +196,10 @@ export default {
 	},
 	data() {
 		return {
-			read: '0',
-			redact: '0',
-			friends: [],
-			enemy: [],
+			read: '2',
+			redact: '2',
+			// friends: [],
+			// enemy: ['Орлов П.С.'],
 			people: [
 				{ header: 'Согласующие' },
 				{ name: 'Орлов П.С.', group: 'Генеральный директор', avatar: 0 },

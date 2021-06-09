@@ -1,43 +1,45 @@
 <template lang="pug">
-.grid
-	.num Рабочий
-	.status
-		Status(title='Подготовка')
-	.zag(:contenteditable='editZag')
-		v-btn.star(
-			icon,
-			small,
-			@click='starred = !starred',
-			:class='{ starred: starred }'
-		)
-			v-icon(v-if='!starred') mdi-star-outline
-			v-icon(v-else) mdi-star
-		| Проект договора об организации питания туристических групп
-		v-btn.ml-4(icon)
-			svg-icon(icon='reload')
-		v-btn(icon, @click='editZag')
-			svg-icon(icon='pencil')
-		v-btn(icon)
-			svg-icon(icon='bin')
-	.but
-		v-btn(
-			depressed,
-			v-for='button in buttons',
-			:key='button.label',
-			:color='button.color',
-			dark
-		)
-			| {{ button.label }}
-			v-icon.ml-2(v-if='button.icon') mdi-printer
-		MoreBt(:items='actions')
+div
+	Loader(v-if="loading")
+	.grid(v-else)
+		.num Рабочий
+		.status
+			Status(title='Подготовка')
+		.zag(:contenteditable='editZag')
+			v-btn.star(
+				icon,
+				small,
+				@click='starred = !starred',
+				:class='{ starred: starred }'
+			)
+				v-icon(v-if='!starred') mdi-star-outline
+				v-icon(v-else) mdi-star
+			| Проект договора об организации питания туристических групп
+			v-btn.ml-4(icon)
+				svg-icon(icon='reload')
+			v-btn(icon, @click='editZag')
+				svg-icon(icon='pencil')
+			v-btn(icon)
+				svg-icon(icon='bin')
+		.but
+			v-btn(
+				depressed,
+				v-for='button in buttons',
+				:key='button.label',
+				:color='button.color',
+				dark
+			)
+				| {{ button.label }}
+				v-icon.ml-2(v-if='button.icon') mdi-printer
+			MoreBt(:items='actions')
 
-	v-tabs.mytab(v-model='tt')
-		v-tab Главная
-		v-tab Ход согласования
-		v-tab-item(key='1')
-			MainTab
-		v-tab-item(key='2')
-			Hod
+		v-tabs.mytab(v-model='tt')
+			v-tab Главная
+			v-tab Ход согласования
+			v-tab-item(key='1')
+				MainTab
+			v-tab-item(key='2')
+				Hod
 </template>
 
 <script>
@@ -45,6 +47,7 @@ import Status from '@/components/Status.vue'
 import MoreBt from '@/components/MoreBt.vue'
 import MainTab from '@/components/MainTab.vue'
 import Hod from '@/components/Hod.vue'
+import Loader from '@/components/Loader.vue'
 
 export default {
 	components: {
@@ -52,8 +55,10 @@ export default {
 		MoreBt,
 		MainTab,
 		Hod,
+		Loader,
 	},
 	computed: {
+		loading() { return this.$store.getters.loading },
 		editMode() {
 			return this.$store.getters.editMode
 		},

@@ -10,13 +10,14 @@ export default new Vuex.Store({
 		user: 0,
 		editMode: false,
 		editor: null,
+		loading: false,
 		edits: [
 			{ id: 1, ref: "block1",
 				content: `
-					<h2 class="ql-align-center">Договор</h2>
+					<p class="ql-align-center">Договор</p>
 					<p>ООО "Трактир Сельская кухня", именуемое - "Исполнитель и/или Ресторан" с одной стороны и ООО "Вокруг света", именуемое далее - "Заказчик", с другой стороны, заключили настоящий договор о нижеследующем: </p>
 					<br/>
-					<h4>Предмет договора</h4>
+					<p>Предмет договора</p>
 					<ol>
 					<li>Согласно настоящему договору Ресторан принимает на себя
 					обязанности по организации обедов и ужинов для туристических групп и
@@ -47,6 +48,7 @@ export default new Vuex.Store({
 		editMode: state => { return state.editMode },
 		edits: state => { return state.edits },
 		editor: state => { return state.editor },
+		loading: state => { return state.loading },
 	},
 	mutations: {
 		toggleDrawer (state) { state.drawer = !state.drawer },
@@ -61,6 +63,10 @@ export default new Vuex.Store({
 			state.edits.splice(state.editor - 1, 1)
 		},
 		setEditor (state, payload) { state.editor = payload },
+		setLoading (state) { state.loading = !state.loading },
+		updateEdit (state, payload) {
+			state.edits[payload.index].content = payload.html
+		}
 	},
 	actions: {
 	},

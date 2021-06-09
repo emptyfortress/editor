@@ -14,7 +14,6 @@ v-data-table(:headers="headers" :items="items" hide-default-footer hide-default-
 				td {{ item.created }}
 				td {{ item.modified }}
 
-
 </template>
 
 <script>
@@ -24,7 +23,14 @@ export default {
 		goto(e) {
 			if (!e.url) {
 				return
-			} else this.$router.push(e.url)
+			} else {
+				this.$store.commit('setLoading')
+				this.$router.push(e.url)
+				setTimeout( () => {
+					this.$store.commit('setLoading')
+				}, 1200 )
+
+			}
 		}
 	}
 }

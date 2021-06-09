@@ -1,6 +1,6 @@
 <template lang="pug">
 .home
-	Section(v-for="block in blocks" :heading="block.heading" :badge="block.badge" :items="block.items")
+	Section(v-for="block in blocks" :heading="block.heading" :badge="block.badge" :items="block.items" :key="block.id")
 	LastCards.full
 
 </template>
