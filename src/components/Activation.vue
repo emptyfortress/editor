@@ -13,7 +13,7 @@
 		.flex
 			v-text-field(label="Ошибка" value="C:/temp/test.jpg").err
 			v-btn(flat color="primary" small) Загрузить
-		.mess Данный файл не является файлом запроса активации. Попробуйте еще раз?
+		.mess Данный файл не является файлом запроса активации. Проверьте путь и попробуйте еще раз?
 	.block
 		h3 3. Активируйте свою копию Docsvision
 		.flex
@@ -26,11 +26,11 @@
 			v-btn(flat color="primary" small) Скачать
 	.block
 		h3 5. Укажите путь к файлу активации в консоли Docsvision
-		.flex
+		//- .flex
 			v-text-field(label="Выбрать файл")
 			v-btn(flat color="primary" small) Выбрать
 
-	v-btn(flat color="success" large).middle Активировать
+	//- v-btn(flat color="success" large).middle Активировать
 
 
 
