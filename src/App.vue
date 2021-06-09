@@ -1,72 +1,21 @@
 <template lang="pug">
 v-app 
 	SvgSprite
-	Drawer(:maincolor='maincolor')
 	v-app-bar.pr-2(
 		app,
 		:color='maincolor',
 		flat,
-		clipped-left,
-		elevation='2',
-		collapse-on-scroll,
-		:class='calcWidth()'
 	)
-		v-app-bar-nav-icon(color='#fff', @click='$store.commit("toggleDrawer")')
-		.logo(v-show='scroll')
-			span {{ title }}
-		v-spacer
-		v-btn.mr-3(href='', icon, v-show='scroll')
-			v-icon(color='#fff') mdi-magnify
-		v-menu(bottom, left)
-			template(v-slot:activator='{ on, attrs }')
-				.rel(v-show='scroll')
-					v-avatar(
-						color='blue lighten-4',
-						size='35',
-						v-ripple,
-						v-bind='attrs',
-						v-on='on'
-					)
-						img(:src='require(`@/assets/img/user${user}.svg`)')
-					.dot
-			v-list.menu
-				v-list-item(
-					link,
-					two-line,
-					v-for='men in users',
-					@click='setActiveUser(men.id)'
-					:key='men.id'
-				)
-					v-list-item-content
-						v-list-item-title {{ men.name }}
-						v-list-item-subtitle
-							span.ddot
-							span активен
-					v-list-item-avatar(color='blue lighten-4')
-						v-img(:src='require(`@/assets/img/user${men.id}.svg`)')
-
-		v-btn.ml-3(icon, dark, v-show='scroll')
-			v-icon mdi-help-circle-outline
-	v-main(v-scroll='handleScroll')
-		.subbar(:class='calcBar')
-			.tools(:class='{ away: editMode }')
-				v-btn(dark, depressed, tile, :color='create')
-					v-icon mdi-plus
-					span Создать
-				.scan(v-ripple)
-					svg-icon(icon='search-scan')
-			.editor(:class='{ here: editMode }')
-				//- v-btn(depressed, dark, small, :color='create' @click="addBlock") Новый блок
-				//- v-btn(depressed, dark, small, :color='create') Доступ к блоку
-				//- v-btn(depressed, dark, small, :color='create') Удалить блок
-				v-btn(depressed, dark, :color='create' @click="updateEdits") Сохранить документ
+		.logo
+			div Сервис активации Docsvision 5
+			img(src="@/assets/img/logo.svg")
+	v-main
 		v-container.cont
 			v-slide-x-transition(mode='out-in')
 				router-view
 </template>
 
 <script>
-import Drawer from './components/Drawer'
 import { maincolor } from '@/components/mixins/maincolor'
 import SvgSprite from '@/components/SvgSprite.vue'
 
@@ -74,115 +23,16 @@ export default {
 	name: 'App',
 	mixins: [maincolor],
 	components: {
-		Drawer,
 		SvgSprite,
 	},
 	data: () => ({
-		scroll: true,
-		users: [
-			{ id: 0, name: 'Орлов П.С.' },
-			{ id: 1, name: 'Гусева К.А.' },
-			{ id: 17, name: 'Чайка С.В.' },
-		],
 	}),
-	computed: {
-		calcBar() {
-			if (this.editMode) {
-				switch (this.maincolor) {
-					case 'docolor':
-						return 'docolor stick'
-					case 'taskcolor':
-						return 'taskcolor stick'
-					default:
-						return 'dark stick'
-				}
-			} else if (!this.editMode) {
-				switch (this.maincolor) {
-					case 'docolor':
-						return 'docolor'
-					case 'taskcolor':
-						return 'taskcolor'
-					default:
-						return 'dark'
-				}
-			} else return 'dark'
-		},
-		editMode() {
-			return this.$store.getters.editMode
-		},
-		create() {
-			switch (this.maincolor) {
-				case 'docolor':
-					return '#005484'
-				case 'taskcolor':
-					return '#3F6D34'
-				default:
-					return '#1B222C'
-			}
-		},
-		title() {
-			return this.$route.meta.title
-		},
-		drawer() {
-			return this.$store.getters.drawer
-		},
-		mini() {
-			return this.$store.getters.mini
-		},
-		user() {
-			return this.$store.getters.user
-		},
-	},
-
-	methods: {
-		updateEdits() {
-			this.$store.commit('setLoading')
-			setTimeout( () => {
-				this.$store.commit('setEditMode', false)
-				this.$store.commit('setLoading')
-			}, 800 )
-		},
-		handleScroll() {
-			if (window.pageYOffset > 0) {
-				this.scroll = false
-			} else if (window.pageYOffset < 40) {
-				this.scroll = true
-			}
-		},
-		calcWidth() {
-			if (this.drawer && !this.mini) {
-				return 'drawer'
-			} else if (this.drawer && this.mini) {
-				return 'mid'
-			} else return 'sm'
-		},
-		setActiveUser(e) {
-			this.$store.commit('setLoading')
-			this.$store.commit('setUser', e)
-			this.$store.commit('setEditMode', false)
-			setTimeout( () => {
-				this.$store.commit('setLoading')
-			}, 1200 )
-		},
-	},
 }
 </script>
 
 <style scoped lang="scss">
 @import '@/assets/css/colors.scss';
 
-.v-toolbar.v-toolbar--collapsed {
-	max-width: 260px;
-	&.sm {
-		max-width: 48px;
-	}
-	&.mid {
-		max-width: 82px;
-	}
-	&.drawer {
-		max-width: 320px;
-	}
-}
 .v-main {
 	background: #efefef;
 }
@@ -193,8 +43,16 @@ export default {
 }
 
 .logo {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
 	color: #fff;
 	font-size: 1.4rem;
+	text-align: center;
+	img {
+		display: block;
+		height: 34px;
+	}
 	/* width: 250px; */
 }
 .icon-user,
