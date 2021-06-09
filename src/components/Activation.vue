@@ -8,6 +8,12 @@
 		.flex
 			v-text-field(label="Выбрать файл")
 			v-btn(flat color="primary" small) Загрузить
+	.block.err
+		h3 2. Загрузите файл запроса активации на сервер Docsvision:
+		.flex
+			v-text-field(label="Ошибка" value="C:/temp/test.jpg").err
+			v-btn(flat color="primary" small) Загрузить
+		.mess Данный файл не является файлом запроса активации. Попробуйте еще раз?
 	.block
 		h3 3. Активируйте свою копию Docsvision
 		.flex
@@ -68,4 +74,13 @@ p {
 	display: block;
 	margin: 0 auto;
 }
+.block.err {
+	border-color: red;
+	outline: 5px solid pink;
+}
+	.mess {
+		color: red;
+		font-size: .8rem;
+		transform: translateY(-20px);
+	}
 </style>
