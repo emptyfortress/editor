@@ -27,6 +27,7 @@
 	v-btn(flat color="success" large).middle Активировать
 
 
+
 </template>
 
 <script>
